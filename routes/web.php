@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\CheckLogin;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -25,14 +27,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('admin.layouts.master');
-})->name('home');
-Route::resource('categories', CategoryController::class);
-Route::resource('users', UserController::class);
-Route::resource('products', ProductController::class);
 
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.layouts.master');
+    })->name('home');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('menus', MenuController::class);
+});
 
 Route::get('/test', function () {
-    return view('test');
+   session_start();
+   $_SESSION['a'] = 123;
 });

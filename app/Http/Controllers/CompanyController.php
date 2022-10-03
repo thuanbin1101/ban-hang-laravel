@@ -12,9 +12,11 @@ class CompanyController extends Controller
         $this->middleware('auth:api');
     }
 
+    
+
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::all(); 
         return response()->json([
             'status' => 'success',
             'companies' => $companies,
@@ -42,7 +44,7 @@ class CompanyController extends Controller
 
     public function show($id)
     {
-        $company = Company::find($id);
+        $company = Company::find($id); 
         return response()->json([
             'status' => 'success',
             'company' => $company,

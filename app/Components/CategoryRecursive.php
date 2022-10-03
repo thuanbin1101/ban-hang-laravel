@@ -4,7 +4,7 @@ namespace App\Components;
 
 use App\Models\Category;
 
-class Recursive
+class CategoryRecursive
 {
     private $data;
     private string $htmlSelect = "";
@@ -14,7 +14,7 @@ class Recursive
         $this->data = $data;
     }
 
-    public function categoryRecursive($parentId, $id = 0, $text = '')
+    public function categoryRecursive($parentId , $id = 0, $text = '')
     {
         foreach ($this->data as $each) {
             if ($each->parent_id === $id) {

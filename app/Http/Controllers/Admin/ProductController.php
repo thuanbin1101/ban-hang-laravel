@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Components\CategoryRecursive;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
 use App\Models\Category;
@@ -19,7 +20,6 @@ class ProductController extends Controller
     {
         $this->product = $product;
         $this->category = $category;
-
     }
 
     /**
@@ -27,14 +27,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): \Illuminate\Http\Response
     {
         $products = $this->product::query()->latest()->paginate(5);
         return view('admin.products.index', [
             'products' => $products
         ]);
     }
-
+    public function getCategory($parentId)
+    {
+        $data = $this->category::all();
+        $recursive = new CategoryRecursive($data);
+        return $recursive->categoryRecursive($parentId);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -42,9 +47,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->category::all();
+        $htmlOptionCategory = $this->getCategory("");
         return view('admin.products.create', [
-            'categories' => $categories
+            'htmlOptionCategory' => $htmlOptionCategory
         ]);
     }
 
@@ -61,15 +66,13 @@ class ProductController extends Controller
             'content' => $request->get('content'),
             'price' => $request->get('price'),
             'category_id' => $request->get('category_id'),
-//            'user_id' => auth()->id(),
-            'user_id' => 31,
+            'user_id' => auth()->id(),
 
         ];
-        $file = $request->file('feature_image_path');
+        $file = $request->file('feature_image_path'); //
         $fileNameOrigin = $file->getClientOriginalName();
         $fileNameHash = Str::random(20) . "." . $file->getClientOriginalExtension();
-//        $filePath = $file->storeAs('public/products/' . auth()->id(), $fileNameHash);
-        $filePath = $file->storeAs('public/products/', $fileNameHash);
+        $filePath = $file->storeAs('public/products/' . auth()->id(), $fileNameHash);
         $dataFile = [
             'file_name' => $fileNameOrigin,
             'file_path' => Storage::url($filePath)
@@ -100,7 +103,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->query()->find($id);
+        $product = $this->product->query()->find($id); // tim san pham co ID la 1
         $categories = $this->category::all();
         return view('admin.products.edit', [
             'product' => $product,
@@ -122,15 +125,13 @@ class ProductController extends Controller
             'content' => $request->get('content'),
             'price' => $request->get('price'),
             'category_id' => $request->get('category_id'),
-//            'user_id' => auth()->id(),
-            'user_id' => 31,
+            'user_id' => auth()->id(),
         ];
         if($request->hasFile('feature_image_path')){
             $file = $request->file('feature_image_path');
             $fileNameOrigin = $file->getClientOriginalName();
             $fileNameHash = Str::random(20) . "." . $file->getClientOriginalExtension();
-//            $filePath = $file->storeAs('public/products/' . auth()->id(), $fileNameHash);
-            $filePath = $file->storeAs('public/products/', $fileNameHash);
+            $filePath = $file->storeAs('public/products/' . auth()->id(), $fileNameHash);
 
             $dataFile = [
                 'file_name' => $fileNameOrigin,
@@ -154,6 +155,5 @@ class ProductController extends Controller
     {
         $this->product::query()->find($id)->delete();
         return redirect()->route('products.index')->with('success', "Successfully Deleted");
-
     }
 }

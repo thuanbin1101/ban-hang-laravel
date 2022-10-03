@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Components\Recursive;
+use App\Components\CategoryRecursive;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
@@ -32,10 +32,16 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function getCategory($parentId)
+    {
+        $data = Category::all();
+        $recursive = new CategoryRecursive($data);
+        return $recursive->categoryRecursive($parentId);
+    }
 
     public function create()
     {
-        $htmlOptionCategory = $this->getCategory();
+        $htmlOptionCategory = $this->getCategory("");
         return view('admin.categories.create', [
             'htmlOptionCategory' => $htmlOptionCategory
         ]);
@@ -69,12 +75,7 @@ class CategoryController extends Controller
         //
     }
 
-    public function getCategory($parentId = '')
-    {
-        $data = Category::all();
-        $recursive = new Recursive($data);
-        return $recursive->categoryRecursive($parentId);
-    }
+
 
     /**
      * Show the form for editing the specified resource.

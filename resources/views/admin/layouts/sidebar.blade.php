@@ -97,6 +97,22 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="uil-store"></i>
+                    <span> Menus </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('menus.index')}}">List Menu</a>
+                    </li>
+                    <li>
+                        <a href="{{route('menus.create')}}">Create Menu</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- End Sidebar -->
 

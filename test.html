@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1 id="text">Hello</h1>
+        <button id="btnA">Hello</button>
+        <button id="btnB">Xin Chào</button>
+        <script>
+            let buttonA = document.getElementById("btnA");
+            let buttonB = document.getElementById("btnB");
+            let text = document.getElementById("text");
+            buttonA.addEventListener("click", function () {
+                text.innerHTML = "Hello"
+            });
+            buttonB.addEventListener("click", function () {
+                text.innerHTML = "Xin chào"
+            });
+        </script>
+    </body>
+</html>

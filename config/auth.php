@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api',
+        'guard' => 'web', // đổi cái 'api' này thành 'web'
         'passwords' => 'users',
     ],
 

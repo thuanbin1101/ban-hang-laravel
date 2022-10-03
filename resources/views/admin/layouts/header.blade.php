@@ -210,7 +210,7 @@
                                              class="rounded-circle">
                                 </span>
                 <span>
-                                        <span class="account-user-name">Thai</span>
+                                        <span class="account-user-name">{{auth()->user()->name}}</span>
                                         <span class="account-position">Founder</span>
                                     </span>
             </a>
