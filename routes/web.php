@@ -37,6 +37,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/shop', [HomeController::class, 'ShowShop'])->name('shop');
+
 
 
 Route::get('/test', function () {

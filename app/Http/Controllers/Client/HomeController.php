@@ -27,6 +27,10 @@ class HomeController extends Controller
         //
     }
 
+    public function ShowShop(){
+        return view('client.shop');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,6 +41,8 @@ class HomeController extends Controller
     {
         //
     }
+
+    
 
     /**
      * Display the specified resource.
