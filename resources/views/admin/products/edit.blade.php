@@ -1,4 +1,8 @@
 @extends('admin.layouts.master')
+@push("css")
+    <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin/product/add/add.css')}}" rel="stylesheet"/>
+@endpush
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -48,24 +52,50 @@
                        placeholder="">
             </div>
 
-            <div class="form-group">
-                <label for="inputEmail4" class="col-form-label">Image Product</label>
-                <input name="feature_image_path" type="file" class="form-control-file" id="inputEmail4" placeholder="">
-                <br><img src="{{asset($product->feature_image_path)}}" alt="">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="col-form-label">Image Product</label>
+                        <input name="feature_image_path" type="file" class="form-control-file" id="inputEmail4"
+                               placeholder="">
+                        <br>
+                        <img width="200px" height="200px" src="{{asset($product->feature_image_path)}}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="inputEmail4" class="col-form-label">Image Product Detail</label>
+                        <input
+                            multiple
+                            name="image_path[]" accept="image/*" type="file" class="form-control-file" id="inputEmail4"
+                            placeholder="">
+                        <br>
+                        <br>
+                        @foreach($product->images as $each)
+                            <img style="margin-right: 70px" width="200px" height="200px" src="{{asset($each->image_path)}}" alt="">
+                        @endforeach
+                    </div>
+                </div>
             </div>
+
             <div class="form-group">
                 <label for="inputPassword5" class="col-form-label">Select Category</label>
-                <select name="category_id" class="custom-select mb-3">
+                <select name="category_id" class="custom-select select2-init">
                     <option value="">Choose Category</option>
-                    @foreach($categories as $each)
-                        <option
-                            {{$each->id === $product->category_id ? 'selected' : ''}} value="{{$each->id}}">{{$each->name}}</option>
+                    {!! $htmlOptionCategory !!}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword5" class="col-form-label">Select Tag</label>
+                <select name="tags[]" class="form-control tags_select_choose" multiple="multiple">
+                    @foreach($product->tags as $each)
+                    <option value="{{$each->name}}" selected="selected">{{$each->name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="inputEmail4" class="col-form-label">Content Product</label>
-                <textarea id="mytextarea" name="content" class="form-control">{{$product->content}}"</textarea>
+                <textarea id="mytextarea" name="content" class="form-control">{!! $product->content !!}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -73,16 +103,9 @@
     </div>
 @endsection
 @push('script')
-    <script src="https://cdn.tiny.cloud/1/o9bdykr38uld5i7zkhn4eqt5oap4d75v9kp7uv58fvs3aijf/tinymce/6/tinymce.min.js"
+    <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+    <script src="https://cdn.tiny.cloud/1/o9bdykr38uld5i7zkhn4eqt5oap4d75v9kp7uv58fvs3aijf/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-            toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-            toolbar_mode: 'floating',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-        });
-    </script>
+
+    <script src="{{asset('admin/product/add/add.js')}}"></script>
 @endpush
