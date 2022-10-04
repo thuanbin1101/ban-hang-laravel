@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.home');
+        return view('client.layouts.home');
     }
 
     /**
@@ -29,6 +29,18 @@ class HomeController extends Controller
 
     public function ShowShop(){
         return view('client.shop');
+    }
+
+    public function getDetailProduct(){
+        return view('client.detail');
+    }
+
+    public function showCart(){
+        return view('client.cart');
+    }
+
+    public function showCheckout(){
+        return view('client.checkout');
     }
 
     /**

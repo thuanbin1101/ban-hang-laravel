@@ -39,7 +39,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/shop', [HomeController::class, 'ShowShop'])->name('shop');
 
+Route::get('/detail', [HomeController::class, 'getDetailProduct'])->name('detail');
 
+Route::get('/cart', [HomeController::class, 'ShowCart'])->name('cart');
+
+Route::get('/checkout', [HomeController::class, 'ShowCheckout'])->name('checkout');
 
 Route::get('/test', function () {
    session_start();
