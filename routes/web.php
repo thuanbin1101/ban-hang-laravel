@@ -24,6 +24,15 @@ use Illuminate\Support\Facades\Storage;
 */
 Auth::routes();
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.layouts.master');
@@ -33,6 +42,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('menus', MenuController::class);
 });
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -49,3 +59,5 @@ Route::get('/test', function () {
    session_start();
    $_SESSION['a'] = 123;
 });
+
+

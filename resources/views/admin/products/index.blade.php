@@ -47,13 +47,13 @@
                 <tr>
                     <td>{{$each->id}}</td>
                     <td class="">
-                        <img src="{{asset($each->feature_image_path)}}" alt="">
+                        <img width="150px" height="150px" src="{{asset($each->feature_image_path)}}" alt="">
                     </td>
                     <td class="table-user">
                         {{$each->name}}
                     </td>
                     <td class="">
-                        {{$each->price}}
+                        {{$each->price . " VNĐ"}}
                     </td>
                     <td class="">
                         {{optional($each->category)->name}}
@@ -77,6 +77,7 @@
     {!!$products->links()!!}
 @endsection
 @push('script')
+    <script src="{{asset('vendor/sweetalert2/sweetalert2@11.js')}}"></script>
     <script>
         let deleteLinks = document.querySelectorAll('.delete');
         for (let i = 0; i < deleteLinks.length; i++) {
