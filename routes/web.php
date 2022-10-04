@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Client\HomeController;
 use App\Http\Middleware\CheckLogin;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 Auth::routes();
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
@@ -30,6 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -40,4 +42,22 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('menus', MenuController::class);
 });
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/shop', [HomeController::class, 'ShowShop'])->name('shop');
+
+Route::get('/detail', [HomeController::class, 'getDetailProduct'])->name('detail');
+
+Route::get('/cart', [HomeController::class, 'ShowCart'])->name('cart');
+
+Route::get('/checkout', [HomeController::class, 'ShowCheckout'])->name('checkout');
+
+Route::get('/test', function () {
+   session_start();
+   $_SESSION['a'] = 123;
+});
+
 
