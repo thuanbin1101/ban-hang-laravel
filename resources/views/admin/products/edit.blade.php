@@ -34,6 +34,15 @@
             {{ session('success') }}
         </div>
     @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row">
         <form class="col-md-12" method="POST" action="{{route('products.update',$product->id)}}"
               enctype="multipart/form-data">

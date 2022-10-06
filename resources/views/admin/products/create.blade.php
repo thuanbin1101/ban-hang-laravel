@@ -44,14 +44,14 @@
         </div>
     @endif
     <div class="row">
-        <form class="col-md-12" method="POST" action="{{route('products.update',$product->id)}}"
+        <form class="col-md-12" method="POST" action="{{route('products.store')}}"
               enctype="multipart/form-data">
-            @method("PUT")
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Name Product</label>
-                    <input name="name" type="text" class="form-control" id="inputEmail4" placeholder="">
+                    <input name="name" value="{{old('name')}}" type="text" class="form-control" id="inputEmail4"
+                           placeholder="">
                 </div>
             </div>
             <div class="form-group">

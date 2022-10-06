@@ -65,8 +65,8 @@
                               method="POST">
                             @method("DELETE")
                             @csrf
-                            <a href="javascript:{}"
-                               class="action-icon delete"> <i class="mdi mdi-delete"></i></a>
+                            <a href="javascript:{}" data-url="{{route('products.destroy',$each->id)}}"
+                               class="action-icon product-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -78,16 +78,8 @@
 @endsection
 @push('script')
     <script src="{{asset('vendor/sweetalert2/sweetalert2@11.js')}}"></script>
+    <script src="{{asset('admin/product/index/list.js')}}"></script>
     <script>
-        let deleteLinks = document.querySelectorAll('.delete');
-        for (let i = 0; i < deleteLinks.length; i++) {
-            deleteLinks[i].addEventListener('click', function (event) {
-                event.preventDefault();
-                let choice = confirm("Are you sure?");
-                if (choice) {
-                    document.getElementById('my_form').submit();
-                }
-            });
-        }
+
     </script>
 @endpush
