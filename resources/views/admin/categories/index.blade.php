@@ -52,8 +52,9 @@
                         <form style="display: inline" id="my_form" action="{{route('categories.destroy',$each->id)}}" method="POST">
                             @method("DELETE")
                             @csrf
-                            <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"
-                               class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                            <a href="javascript:{}"
+                               data-url="{{route('categories.destroy',$each->id)}}"
+                               class="action-icon category-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -63,3 +64,6 @@
     </div><br>
     {!!$categories->links()!!}
 @endsection
+@push('script')
+    <script src="{{asset('admin/category/index/list.js')}}"></script>
+@endpush

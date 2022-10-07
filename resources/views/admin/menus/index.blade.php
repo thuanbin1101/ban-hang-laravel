@@ -53,8 +53,9 @@
                               method="POST">
                             @method("DELETE")
                             @csrf
-                            <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"
-                               class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                            <a href="javascript:{}"
+                               data-url="{{route("menus.destroy",$each->id)}}"
+                               class="action-icon menu-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -64,3 +65,6 @@
     </div><br>
     {!!$menus->links()!!}
 @endsection
+@push('script')
+    <script src="{{asset('admin/menu/index/list.js')}}"></script>
+@endpush

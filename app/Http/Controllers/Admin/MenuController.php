@@ -8,6 +8,7 @@ use App\Models\Menu;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
@@ -112,11 +113,16 @@ class MenuController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $this->menu::query()->find($id)->delete();
-        return redirect()->route('menus.index')->with('success', "Successfully Deleted");
+        try {
+            $this->menu::query()->find($id)->delete();
+            return response()->json(['code' => 200, 'message' => "Success"]);
+        } catch (Exception $e) {
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+        }
     }
 }

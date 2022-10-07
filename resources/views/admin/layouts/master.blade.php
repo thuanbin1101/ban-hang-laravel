@@ -52,6 +52,8 @@
 
 <!-- demo app -->
 <script src="{{asset('admin/assets/js/pages/demo.dashboard.js')}}"></script>
+<script src="{{asset('vendor/sweetalert2/sweetalert2@11.js')}}"></script>
+
 <!-- end demo js-->
 @stack('script')
 </body>

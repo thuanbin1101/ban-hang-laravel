@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -76,7 +77,6 @@ class CategoryController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -115,12 +115,16 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $this->category->query()->find($id)->delete();
-        return redirect()->route('categories.index')->with('success', "Successfully Deleted");
-
+        try {
+            $this->category::query()->find($id)->delete();
+            return response()->json(['code' => 200, 'message' => "Success"]);
+        } catch (Exception $e) {
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+        }
     }
 }

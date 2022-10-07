@@ -21,7 +21,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">List Products</h4>
+                <h4 class="page-title">List Settings</h4>
             </div>
         </div>
     </div>
@@ -35,38 +35,31 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
+                <th>Config Key</th>
+                <th>Config Value</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $each)
+            @foreach($settings as $each)
                 <tr>
                     <td>{{$each->id}}</td>
-                    <td class="">
-                        <img width="150px" height="150px" src="{{asset($each->feature_image_path)}}" alt="">
+                    <td class="table-user">
+                        {{$each->config_key}}
                     </td>
                     <td class="table-user">
-                        {{$each->name}}
-                    </td>
-                    <td class="">
-                        {{$each->price . " VNĐ"}}
-                    </td>
-                    <td class="">
-                        {{optional($each->category)->name}}
+                        {{$each->config_value}}
                     </td>
                     <td class="table-action">
-                        <a href="{{route('products.edit',$each->id)}}" class="action-icon"> <i
+                        <a href="{{route('settings.edit',$each->id)}}" class="action-icon"> <i
                                 class="mdi mdi-pencil"></i></a>
-                        <form style="display: inline" id="my_form" action="{{route('products.destroy',$each->id)}}"
+                        <form style="display: inline" id="my_form" action="{{route('settings.destroy',$each->id)}}"
                               method="POST">
                             @method("DELETE")
                             @csrf
-                            <a href="javascript:{}" data-url="{{route('products.destroy',$each->id)}}"
-                               class="action-icon product-delete"> <i class="mdi mdi-delete"></i></a>
+                            <a href="javascript:{}"
+                               data-url="{{route("settings.destroy",$each->id)}}"
+                               class="action-icon setting-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -74,8 +67,8 @@
             </tbody>
         </table>
     </div><br>
-    {!!$products->links()!!}
+    {!!$settings->links()!!}
 @endsection
 @push('script')
-    <script src="{{asset('admin/product/index/list.js')}}"></script>
+    <script src="{{asset('admin/setting/index/list.js')}}"></script>
 @endpush
