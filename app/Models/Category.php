@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->query()->whereNull('parent_id')->with('getChildren')->get(['id','name']);
     }
+
+    public function getProducts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Product::class,'category_id', 'id');
+    }
 }

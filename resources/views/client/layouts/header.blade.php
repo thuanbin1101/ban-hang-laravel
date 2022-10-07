@@ -73,23 +73,16 @@
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
+                        @foreach ($categories as $item)
+                        <div class="{{$item->getChildren->count() ? 'nav-item dropdown' : ''}}">
+                            <a href="{{ route('client.category', ['slug'=>$item->slug]) }}" class="nav-link" data-toggle="{{$item->getChildren->count() ? 'dropdown' : ''}}">{{$item->name}} <i class="{{$item->getChildren->count() ? 'fa fa-angle-down float-right mt-1' : ''}}"></i></a>
+                            <div class="{{$item->getChildren->count() ? 'dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0' : ''}}">
+                                @foreach ($item->getChildren as $cate)
+                                    <a href="{{ route('client.category', ['slug'=>$cate->slug]) }}" class="dropdown-item">{{$cate->name}}</a>
+                                @endforeach
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a>
+                        @endforeach
                     </div>
                 </nav>
             </div>
@@ -103,17 +96,28 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{{ route('home') }}" class="nav-item nav-link">Home</a>
-                            <a href="{{ route('shop') }}" class="nav-item nav-link">Shop</a>
-                            <a href="{{ route('detail') }}" class="nav-item nav-link active">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{{ route('cart') }}" class="dropdown-item">Shopping Cart</a>
-                                    <a href="{{ route('checkout') }}" class="dropdown-item">Checkout</a>
-                                </div>
+                            @foreach ($menus as $menu)
+                            <div class="{{$menu->getChildren->count() ? 'nav-item dropdown' : 'nav-item'}}">
+                                <a href="{{ url('/', [$menu->slug]) }}" data-toggle="{{$menu->getChildren->count() ? 'dropdown' : ''}}" class="{{$menu->getChildren->count() ? 'dropdown-toggle active' : ''}} nav-link">{{$menu->name}}</a>
+                                @if ($menu->getChildren->count())
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        @foreach ($menu->getChildren as $sub_menu)
+                                            <a href="{{ url('/', [$sub_menu->slug]) }}" class="dropdown-item">{{$sub_menu->name}}</a>
+                                        @endforeach     
+                                    </div> 
+                                @endif
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                {{-- <a href="{{ route('client.shop') }}" class="nav-item nav-link">Shop</a>
+                                <a href="{{ route('client.detail') }}" class="nav-item nav-link active">Shop Detail</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="{{ route('client.cart') }}" class="dropdown-item">Shopping Cart</a>
+                                        <a href="{{ route('client.checkout') }}" class="dropdown-item">Checkout</a>
+                                    </div>
+                                </div>
+                                <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
+                            @endforeach
                         </div>
                         {{-- <div class="navbar-nav ml-auto py-0">
                             <a href="" class="nav-item nav-link">Login</a>
@@ -121,6 +125,45 @@
                         </div> --}}
                     </div>
                 </nav>
+
+                @if (request()->is('home'))
+                    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="height: 410px;">
+                                <img class="img-fluid" src="img/carousel-1.jpg" alt="Image">
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                        <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                        <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" style="height: 410px;">
+                                <img class="img-fluid" src="img/carousel-2.jpg" alt="Image">
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                        <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                        <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                                <span class="carousel-control-prev-icon mb-n2"></span>
+                            </div>
+                        </a>
+                        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                                <span class="carousel-control-next-icon mb-n2"></span>
+                            </div>
+                        </a>
+                    </div>                
+                @else
+                    
+                @endif
             </div>
         </div>
     </div>

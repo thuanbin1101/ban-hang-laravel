@@ -27,12 +27,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 Auth::routes();
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    Lfm::routes();
+    // Lfm::routes();
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 Route::middleware('auth')->prefix('admin')->group(function () {
@@ -48,11 +45,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/shop', [HomeController::class, 'ShowShop'])->name('shop');
-Route::get('/detail', [HomeController::class, 'getDetailProduct'])->name('detail');
-Route::get('/cart', [HomeController::class, 'ShowCart'])->name('cart');
-Route::get('/checkout', [HomeController::class, 'ShowCheckout'])->name('checkout');
+Route::get('/home', [HomeController::class, 'index'])->name('client.home');
+
+Route::get('/category/{slug}', [HomeController::class, 'ShowCategory'])->name('client.category');
+
+Route::get('/cart', [HomeController::class, 'ShowCart'])->name('client.cart');
+
+Route::get('/checkout', [HomeController::class, 'showCheckout'])->name('client.checkout');
+
+Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('client.detail');
+
 
 Route::get('/test', function () {
    session_start();

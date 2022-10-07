@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.layouts.home');
+        return view('client.home');
     }
 
     /**
@@ -27,13 +29,15 @@ class HomeController extends Controller
         //
     }
 
-    public function ShowShop(){
-        return view('client.shop');
+    public function ShowCategory($slug = ''){
+        $cate_name = Category::where('slug', $slug)->first();
+        $get_data = Category::where('slug', $slug)->with('getProducts')->get();
+        return view('client.categories', [
+            'cate_name' => $cate_name,
+            'products_cate' => $get_data
+        ]);
     }
 
-    public function getDetailProduct(){
-        return view('client.detail');
-    }
 
     public function showCart(){
         return view('client.cart');
@@ -42,6 +46,16 @@ class HomeController extends Controller
     public function showCheckout(){
         return view('client.checkout');
     }
+
+    public function getProductDetail($id){
+        $product_detail = Product::where('id', $id)->first();
+        return view('client.detail', [
+            'product_detail' => $product_detail
+        ]);
+    }
+
+
+    
 
     /**
      * Store a newly created resource in storage.

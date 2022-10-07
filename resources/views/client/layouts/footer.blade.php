@@ -1,3 +1,41 @@
+    @if (request()->is('/'))
+                <!-- Vendor Start -->
+                <div class="container-fluid py-5">
+                    <div class="row px-xl-5">
+                        <div class="col">
+                            <div class="owl-carousel vendor-carousel">
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-1.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-2.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-3.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-4.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-5.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-6.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-7.jpg" alt="">
+                                </div>
+                                <div class="vendor-item border p-4">
+                                    <img src="img/vendor-8.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Vendor End -->
+    @else
+        
+    @endif
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
@@ -76,12 +114,12 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script src="{{ asset('mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src="{{ asset('mail/contact.js') }}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
