@@ -103,8 +103,8 @@
                                     <div class="dropdown-menu rounded-0 m-0">
                                         @foreach ($menu->getChildren as $sub_menu)
                                             <a href="{{ url('/', [$sub_menu->slug]) }}" class="dropdown-item">{{$sub_menu->name}}</a>
-                                        @endforeach     
-                                    </div> 
+                                        @endforeach
+                                    </div>
                                 @endif
                             </div>
                                 {{-- <a href="{{ route('client.shop') }}" class="nav-item nav-link">Shop</a>
@@ -126,7 +126,7 @@
                     </div>
                 </nav>
 
-                @if (request()->is('home'))
+                @if (request()->is('/'))
                     <div id="header-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active" style="height: 410px;">
@@ -160,9 +160,9 @@
                                 <span class="carousel-control-next-icon mb-n2"></span>
                             </div>
                         </a>
-                    </div>                
+                    </div>
                 @else
-                    
+
                 @endif
             </div>
         </div>
