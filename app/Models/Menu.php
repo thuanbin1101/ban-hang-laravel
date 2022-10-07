@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Menu extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $guarded = [];
     protected $fillable = ['name','parent_id','slug'];
     public function getChildren(): \Illuminate\Database\Eloquent\Relations\HasMany

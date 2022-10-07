@@ -52,7 +52,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('client.home');
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 Route::get('/category/{slug}', [HomeController::class, 'ShowCategory'])->name('client.category');
 
