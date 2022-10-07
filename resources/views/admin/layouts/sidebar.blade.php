@@ -128,6 +128,21 @@
                     </li>
                 </ul>
             </li>
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="uil-store"></i>
+                    <span> Settings </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('settings.index')}}">List Settings</a>
+                    </li>
+                    <li>
+                        <a href="{{route('settings.create')}}">Create Setting</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- End Sidebar -->
 

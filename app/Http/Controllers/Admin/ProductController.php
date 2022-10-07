@@ -179,7 +179,7 @@ class ProductController extends Controller
             $product = $this->product::query()->find($id);
 
             if ($request->hasFile('image_path')) {
-                $this->productImage::query()->where('product_id',$id)->delete();
+                $this->productImage::query()->where('product_id', $id)->delete();
                 foreach ($request->file('image_path') as $each) {
                     $dataProductImage = $this->storageTraitUploadMultiple($each, 'products');
                     $product->images()->create([
@@ -212,11 +212,16 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $this->product::query()->find($id)->delete();
-        return redirect()->route('products.index')->with('success', "Successfully Deleted");
+        try {
+            $this->product::query()->find($id)->delete();
+            return response()->json(['code' => 200, 'message' => "Success"]);
+        } catch (Exception $e) {
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+        }
     }
 }

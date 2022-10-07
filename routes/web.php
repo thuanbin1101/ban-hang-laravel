@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\HomeController;
@@ -27,9 +28,14 @@ use UniSharp\LaravelFilemanager\Lfm;
 Auth::routes();
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    // Lfm::routes();
+     Lfm::routes();
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 
 Route::middleware('auth')->prefix('admin')->group(function () {
@@ -41,6 +47,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('menus', MenuController::class);
     Route::resource('sliders', SliderController::class);
+    Route::resource('settings', SettingController::class);
 });
 
 
@@ -55,10 +62,5 @@ Route::get('/checkout', [HomeController::class, 'showCheckout'])->name('client.c
 
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('client.detail');
 
-
-Route::get('/test', function () {
-   session_start();
-   $_SESSION['a'] = 123;
-});
 
 
