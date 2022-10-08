@@ -48,7 +48,7 @@ class HomeController extends Controller
     }
 
     public function getProductDetail($id){
-        $product_detail = Product::where('id', $id)->first();
+        $product_detail = Product::where('id', $id)->with('images')->first();
         return view('client.detail', [
             'product_detail' => $product_detail
         ]);
