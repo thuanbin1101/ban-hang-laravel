@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Components\CategoryRecursive;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
