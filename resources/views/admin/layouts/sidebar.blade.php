@@ -61,9 +61,9 @@
                     <li>
                         <a href="{{route('users.index')}}">List Users</a>
                     </li>
-{{--                    <li>--}}
-{{--                        <a href="{{route('users.create')}}">Create Users</a>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a href="{{route('users.create')}}">Create Users</a>
+                    </li>
                 </ul>
             </li>
 
