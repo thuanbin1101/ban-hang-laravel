@@ -30,6 +30,10 @@
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-12">
+                    <label for="inputEmail4" class="col-form-label">Name</label>
+                    <input type="name" class="form-control" id="inputEmail4" placeholder="Name">
+                </div>
+                <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
                 </div>
@@ -37,11 +41,6 @@
                     <label for="inputPassword4" class="col-form-label">Password</label>
                     <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="inputPassword5" class="col-form-label">Retype Password</label>
-                <input type="password" class="form-control" id="inputPassword5" placeholder="Retype Password">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
