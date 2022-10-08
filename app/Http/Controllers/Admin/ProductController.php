@@ -86,6 +86,7 @@ class ProductController extends Controller
                 'name' => $request->get('name'),
                 'content' => $request->get('content'),
                 'price' => $request->get('price'),
+                'amount' => $request->get('amount'),
                 'category_id' => $request->get('category_id'),
                 'user_id' => auth()->id(),
             ];
@@ -166,6 +167,7 @@ class ProductController extends Controller
             $dataProductUpdate = [
                 'name' => $request->get('name'),
                 'content' => $request->get('content'),
+                'amount' => $request->get('amount'),
                 'price' => $request->get('price'),
                 'category_id' => $request->get('category_id'),
                 'user_id' => auth()->id(),
