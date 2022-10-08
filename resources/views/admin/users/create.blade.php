@@ -25,17 +25,22 @@
             </div>
         </div>
     </div>
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <form class="col-md-12" method="POST" action="{{route('users.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Name</label>
-                    <input type="name" class="form-control" id="inputEmail4" placeholder="Name">
+                    <input type="text" name="name" class="form-control" id="inputEmail4" placeholder="Name">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                    <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputPassword4" class="col-form-label">Password</label>

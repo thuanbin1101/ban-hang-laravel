@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 21, 2022 at 08:24 AM
+-- Generation Time: Oct 08, 2022 at 07:47 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.9
 
@@ -43,14 +43,21 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `parent_id`, `slug`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Giày Sneaker', 0, 'giay-sneaker', '2022-09-20 07:05:56', '2022-09-20 07:05:56', NULL),
-(2, 'Adidas', 1, 'adidas', '2022-09-20 07:06:08', '2022-09-20 07:06:08', NULL),
-(3, 'Nike', 1, 'nike', '2022-09-20 07:06:17', '2022-09-20 07:06:17', NULL),
-(4, 'Air Jordan', 1, 'air-jordan', '2022-09-20 07:06:25', '2022-09-20 07:06:25', NULL),
-(5, 'Adidas Original', 2, 'adidas-original', '2022-09-20 07:06:37', '2022-09-20 07:06:37', NULL),
-(6, 'Nike Air', 3, 'nike-air', '2022-09-20 07:07:03', '2022-09-20 07:07:03', NULL),
-(7, 'Nike Air Jordan 12', 4, 'nike-air-jordan-12', '2022-09-20 07:07:19', '2022-09-20 07:55:47', NULL),
+(2, 'Adidas', 1, 'adidas', '2022-09-20 07:06:08', '2022-10-06 04:12:01', '2022-10-06 04:12:01'),
+(3, 'Nike', 1, 'nike', '2022-09-20 07:06:17', '2022-10-06 04:11:58', '2022-10-06 04:11:58'),
+(4, 'Air Jordan', 1, 'air-jordan', '2022-09-20 07:06:25', '2022-10-06 04:11:55', '2022-10-06 04:11:55'),
+(5, 'Adidas Original', 2, 'adidas-original', '2022-09-20 07:06:37', '2022-10-06 04:11:22', '2022-10-06 04:11:22'),
+(6, 'Nike Air', 3, 'nike-air', '2022-09-20 07:07:03', '2022-10-06 04:11:19', '2022-10-06 04:11:19'),
+(7, 'Nike Air Jordan 12', 4, 'nike-air-jordan-12', '2022-09-20 07:07:19', '2022-10-06 04:09:40', '2022-10-06 04:09:40'),
 (8, 'sfdgdfsg', 0, 'sfdgdfsg', '2022-09-20 08:02:09', '2022-09-20 08:05:18', '2022-09-20 08:05:18'),
-(9, 'sdfa', 0, 'sdfa', '2022-09-20 08:05:53', '2022-09-20 08:07:04', '2022-09-20 08:07:04');
+(9, 'sdfa', 0, 'sdfa', '2022-09-20 08:05:53', '2022-09-20 08:07:04', '2022-09-20 08:07:04'),
+(10, 'thadsfsdafsdafsdf', 2, 'thadsfsdafsdafsdf', '2022-09-23 07:38:53', '2022-09-23 07:39:10', '2022-09-23 07:39:10'),
+(11, 'sdf', 2, 'sdf', '2022-10-02 03:51:15', '2022-10-02 03:51:30', '2022-10-02 03:51:30'),
+(12, 'ádfsfad', 0, 'adfsfad', '2022-10-06 04:12:29', '2022-10-06 04:26:29', '2022-10-06 04:26:29'),
+(13, '43242', 0, '43242', '2022-10-06 04:22:12', '2022-10-06 04:22:12', NULL),
+(14, 'tgew', 0, 'tgew', '2022-10-06 04:26:59', '2022-10-06 04:30:32', '2022-10-06 04:30:32'),
+(15, 'ergwerwg', 0, 'ergwerwg', '2022-10-06 04:27:01', '2022-10-06 04:27:08', '2022-10-06 04:27:08'),
+(16, '342', 0, '342', '2022-10-06 04:27:02', '2022-10-06 04:30:29', '2022-10-06 04:30:29');
 
 -- --------------------------------------------------------
 
@@ -71,7 +78,9 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(2, 'OKOK123', '231231234', '2022-09-20 23:55:13', '2022-09-20 23:55:13');
+(2, 'OKOK123', '231231234', '2022-09-20 23:55:13', '2022-09-20 23:55:13'),
+(4, 'safg', 's123', '2022-09-23 18:52:18', '2022-09-23 19:12:41'),
+(5, 'safg456', 's123456', '2022-09-23 19:13:09', '2022-09-23 19:13:09');
 
 -- --------------------------------------------------------
 
@@ -88,6 +97,30 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menus`
+--
+
+CREATE TABLE `menus` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `menus`
+--
+
+INSERT INTO `menus` (`id`, `name`, `parent_id`, `slug`, `created_at`, `updated_at`) VALUES
+(4, 'menu 1.1.1', 3, '', NULL, NULL),
+(5, 'menu 1.2', 1, '', NULL, NULL),
+(6, 'Menu 2.1', 2, '', '2022-09-24 21:52:15', '2022-09-24 21:52:15');
 
 -- --------------------------------------------------------
 
@@ -114,7 +147,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2022_09_20_145943_add_column_deleted_at_to_categories_table', 2),
 (18, '2022_09_20_151035_create_products_table', 3),
 (19, '2022_09_20_151412_create_product_images_table', 3),
-(20, '2022_09_21_065020_create_companies_table', 4);
+(20, '2022_09_21_065020_create_companies_table', 4),
+(21, '2022_09_25_034716_create_menus_table', 5),
+(23, '2022_09_25_144326_add_column_slug_to_menus_table', 6),
+(24, '2022_09_26_031201_create_product_tags_table', 7),
+(25, '2022_09_26_031415_create_tags_table', 7),
+(26, '2022_10_03_131340_add_column_feature_image_name_to_products_table', 8),
+(27, '2022_10_03_133652_add_column_image_name_to_product_images_table', 9),
+(28, '2022_10_04_134236_add_column_soft_delete_to_products_table', 10),
+(29, '2022_10_05_030709_create_sliders_table', 11),
+(31, '2022_10_06_130706_create_settings_table', 12),
+(33, '2022_10_08_044118_add_column_amount_to_products_table', 13);
 
 -- --------------------------------------------------------
 
@@ -157,20 +200,29 @@ CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` int(11) DEFAULT NULL,
   `feature_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `feature_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `feature_image_path`, `content`, `user_id`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Adida originlal nike vip', '2000', '/storage/products/31/CqIcgzd71fB1zxB48knB.png', '<p>Mua Gi&agrave;y&nbsp;Nike Air Force 1 \'07 \'Triple Black\' CW2288-001 ch&iacute;nh h&atilde;ng 100% c&oacute; sẵn tại&nbsp;<a href=\"https://authentic-shoes.com/\" target=\"_blank\" rel=\"noopener\">Authentic Shoes</a>. Giao h&agrave;ng miễn ph&iacute; trong 1 ng&agrave;y. Cam kết đền tiền X5 nếu ph&aacute;t hiện Fake. Đổi trả miễn ph&iacute; size. FREE vệ sinh gi&agrave;y &nbsp;trọn đời. MUA NGAY!</p>', 31, 5, '2022-09-20 19:51:55', '2022-09-20 19:51:55');
+INSERT INTO `products` (`id`, `name`, `price`, `amount`, `feature_image_path`, `feature_image_name`, `content`, `user_id`, `category_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Adida originlal nike vip', '2000', NULL, '/storage/products/31/CqIcgzd71fB1zxB48knB.png', NULL, '<p>Mua Gi&agrave;y&nbsp;Nike Air Force 1 \'07 \'Triple Black\' CW2288-001 ch&iacute;nh h&atilde;ng 100% c&oacute; sẵn tại&nbsp;<a href=\"https://authentic-shoes.com/\" target=\"_blank\" rel=\"noopener\">Authentic Shoes</a>. Giao h&agrave;ng miễn ph&iacute; trong 1 ng&agrave;y. Cam kết đền tiền X5 nếu ph&aacute;t hiện Fake. Đổi trả miễn ph&iacute; size. FREE vệ sinh gi&agrave;y &nbsp;trọn đời. MUA NGAY!</p>', 31, 5, '2022-09-20 19:51:55', '2022-09-20 19:51:55', NULL),
+(2, '231231', '2,000,000.00', NULL, '/storage/products/31/QoKaAamRvs0dhEFZ8Wuc.png', '8609_01.png', '<p>dasdf</p>', 31, 2, '2022-10-03 07:10:59', '2022-10-03 07:10:59', NULL),
+(3, 'hgfhdfh', '3,232,323.00', NULL, '/storage/products/31/4eZh5A4TUwZxXGmiGABV.jpg', '305312782_155300693797056_275705105623707881_n.jpg', '<p>sdaf</p>', 31, 6, '2022-10-03 07:16:05', '2022-10-06 04:29:51', '2022-10-06 04:29:51'),
+(4, 'sfdafsdf', '20,000.00', NULL, '/storage/products/31/cYhPYwYGiu9lhfqyFJip.jpg', '305312782_155300693797056_275705105623707881_n.jpg', '<p>fdg</p>', 31, 3, '2022-10-03 07:28:43', '2022-10-06 04:29:47', '2022-10-06 04:29:47'),
+(10, 'dfgdfsgfd', '15,500,000.00', NULL, '/storage/products/31/vIfpg8Z0CS0TEUh5ozz0.png', 'giayjordan.png', '<p>fdg</p>', 31, 6, '2022-10-04 07:24:28', '2022-10-06 04:27:52', '2022-10-06 04:27:52'),
+(11, 'dsfgdfg', '20,000.00', NULL, '/storage/products/31/Dy4FHIGd5RFpMxK1qkTH.jpg', 'ban do.jpg', '<p>hdt</p>', 31, 1, '2022-10-07 23:55:26', '2022-10-07 23:55:26', NULL),
+(12, 'fgfsdgfdsg', '20,000.00', 23, '/storage/products/31/NWrMZ5p02ToDEsew5nwI.png', 'giayjordan.png', '<p>fgd</p>', 31, 1, '2022-10-07 23:56:24', '2022-10-07 23:56:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -181,10 +233,132 @@ INSERT INTO `products` (`id`, `name`, `price`, `feature_image_path`, `content`, 
 CREATE TABLE `product_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `image_path`, `image_name`, `product_id`, `created_at`, `updated_at`) VALUES
+(1, '/storage/products/31/D7RuDCe4BtLvshHShRHJ.png', '719115_01.png', 3, '2022-10-03 07:16:05', '2022-10-03 07:16:05'),
+(2, '/storage/products/31/jhOTgukoClX5hqfklJhK.png', 'giayjordan.png', 3, '2022-10-03 07:16:05', '2022-10-03 07:16:05'),
+(3, '/storage/products/31/9EuuzoNLocX8RofZTudP.png', '719115_01.png', 4, '2022-10-03 07:28:43', '2022-10-03 07:28:43'),
+(4, '/storage/products/31/ZRYU15O8uRKIP0YAuXsD.jpg', '305312782_155300693797056_275705105623707881_n.jpg', 4, '2022-10-03 07:28:43', '2022-10-03 07:28:43'),
+(5, '/storage/products/31/ixLIwfas2WUCF2qcinuK.png', '8609_01.png', 5, '2022-10-03 08:03:19', '2022-10-03 08:03:19'),
+(6, '/storage/products/31/JTSJvHipiWTgx24i2Em7.png', '719115_01.png', 5, '2022-10-03 08:03:19', '2022-10-03 08:03:19'),
+(7, '/storage/products/31/e7Z7uepcQc2kcUYqxe9q.png', '8609_01.png', 6, '2022-10-03 08:03:32', '2022-10-03 08:03:32'),
+(8, '/storage/products/31/myacSvvmApoQQmJ4WNl4.png', '719115_01.png', 6, '2022-10-03 08:03:32', '2022-10-03 08:03:32'),
+(9, '/storage/products/31/DSFJxecmy1eaVrVTzRM9.jpg', 'ban do 3.jpg', 7, '2022-10-03 08:09:22', '2022-10-03 08:09:22'),
+(10, '/storage/products/31/BhgQ87PgViAjdiG8CVnR.jpg', 'ban do 2.jpg', 7, '2022-10-03 08:09:22', '2022-10-03 08:09:22'),
+(12, '/storage/products/31/lUpPdof0Nh9cn9wuhaJS.png', '8609_01.png', 9, '2022-10-03 08:46:09', '2022-10-03 08:46:09'),
+(13, '/storage/products/31/iGZQoMc6Qvut0BQebvC5.png', '719115_01.png', 10, '2022-10-04 07:24:28', '2022-10-04 07:24:28'),
+(14, '/storage/products/31/P4auOpYr3O5TPZGkffJj.jpg', 'bieu do.jpg', 11, '2022-10-07 23:55:26', '2022-10-07 23:55:26'),
+(15, '/storage/products/31/NsnSPgR7ySxFBJsEk6vw.png', '719115_01.png', 12, '2022-10-07 23:56:24', '2022-10-07 23:56:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_tags`
+--
+
+CREATE TABLE `product_tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `tag_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_tags`
+--
+
+INSERT INTO `product_tags` (`id`, `product_id`, `tag_id`, `created_at`, `updated_at`) VALUES
+(1, 6, 1, NULL, NULL),
+(2, 6, 2, NULL, NULL),
+(9, 7, 9, '2022-10-04 02:14:26', '2022-10-04 02:14:26'),
+(10, 10, 10, '2022-10-04 07:24:28', '2022-10-04 07:24:28'),
+(11, 10, 11, '2022-10-04 07:24:28', '2022-10-04 07:24:28'),
+(12, 11, 10, '2022-10-07 23:55:26', '2022-10-07 23:55:26'),
+(13, 11, 11, '2022-10-07 23:55:26', '2022-10-07 23:55:26'),
+(14, 12, 10, '2022-10-07 23:56:24', '2022-10-07 23:56:24'),
+(15, 12, 11, '2022-10-07 23:56:24', '2022-10-07 23:56:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `config_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `config_value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `config_key`, `config_value`, `created_at`, `updated_at`) VALUES
+(3, '21312321', '31313', '2022-10-06 08:17:15', '2022-10-06 08:17:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sliders`
+--
+
+INSERT INTO `sliders` (`id`, `name`, `description`, `image_path`, `image_name`, `created_at`, `updated_at`) VALUES
+(3, 'dfgssdfg123', 'dsfgdfg123', '/storage/sliders/31/XK3q7KOv1sJRF2lvWjgh.png', 'giayjordan.png', '2022-10-06 06:02:45', '2022-10-06 06:02:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'hello', '2022-10-03 08:03:32', '2022-10-03 08:03:32'),
+(2, 'friend', '2022-10-03 08:03:32', '2022-10-03 08:03:32'),
+(3, 'baby', '2022-10-03 08:09:22', '2022-10-03 08:09:22'),
+(6, '1', '2022-10-04 02:12:13', '2022-10-04 02:12:13'),
+(7, 'ken', '2022-10-04 02:12:13', '2022-10-04 02:12:13'),
+(8, '7', '2022-10-04 02:12:53', '2022-10-04 02:12:53'),
+(9, 'neymar', '2022-10-04 02:14:26', '2022-10-04 02:14:26'),
+(10, 'orange', '2022-10-04 07:24:28', '2022-10-04 07:24:28'),
+(11, 'purple', '2022-10-04 07:24:28', '2022-10-04 07:24:28');
 
 -- --------------------------------------------------------
 
@@ -238,10 +412,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (28, 'Prof. Nadia Prohaska', 'leffler.glenda@example.com', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'diK7l1XkGt', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
 (29, 'Prof. Jovany Lang MD', 'chet80@example.net', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '75Z5Dpxtau', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
 (30, 'Kiera Wunsch', 'jgusikowski@example.org', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Vd9kCxXAQ7', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(31, 'thuan', 'thuan@gmail.com', NULL, '$2y$10$FWSjy84yYinNCsbvaZIl8eU7OrhDb4k8A2RhI59YeVKsvr8LpmjN2', 'yPNri4TEi9ObGdKSlG4u9Pk8UqRpiBA5PPZHaUbQbwdNKJVEQuMR6pjYMHR6', '2022-09-10 21:20:12', '2022-09-10 21:20:12'),
+(31, 'thuan', 'thuan@gmail.com', NULL, '$2y$10$FWSjy84yYinNCsbvaZIl8eU7OrhDb4k8A2RhI59YeVKsvr8LpmjN2', 'ffX3qNgA0C19VfCDdo5hG1p9ry1yoTWV84G6V0RNxXFiNoba8m2TAZPFLQC3', '2022-09-10 21:20:12', '2022-09-10 21:20:12'),
 (32, 'ken', 'ken@gmail.com', NULL, '$2y$10$6.Q6iJUwzqCtYiaHZ81MwOsV4DKNCQJcoVGSN/.tNQ3mKM2Bg7JYK', NULL, '2022-09-20 21:01:28', '2022-09-20 21:01:28'),
 (33, 'ken', 'ken123@gmail.com', NULL, '$2y$10$2OoQo53WUGBKVjq9Jxa8uOAG7hX8snO/6T.DVhR8tkHDpMZdQFBPG', NULL, '2022-09-20 21:02:42', '2022-09-20 21:02:42'),
-(34, 'baby', 'abc@gmail.com', NULL, '$2y$10$5KIl3uXkrNMTTMXYFDmcyOzemTx7JdrY5V01OZTeSJ9HJokBkugqu', NULL, '2022-09-21 00:31:22', '2022-09-21 00:31:22');
+(34, 'baby', 'abc@gmail.com', NULL, '$2y$10$5KIl3uXkrNMTTMXYFDmcyOzemTx7JdrY5V01OZTeSJ9HJokBkugqu', NULL, '2022-09-21 00:31:22', '2022-09-21 00:31:22'),
+(35, 'zczxc', '123@gmail.com', NULL, '$2y$10$vnnLjXhJ1KOiGVRg/DyIkuOsvac8wFjYyPInzocRoViIeAM51TuDm', NULL, '2022-09-21 07:26:20', '2022-09-21 07:26:20'),
+(36, 'zxc', '111@gmail.com', NULL, '$2y$10$Jc/55uTpkEDfm2uWpXiEuuh1ul7iAYg00ktsshuT791QMm/AkBfly', NULL, '2022-09-22 08:10:17', '2022-09-22 08:10:17'),
+(38, 'thai', 'thai@gmail.com', NULL, '$2y$10$.VOdjZ5QN.wpujGZLnkMw.GD8aDEYoSrtTq/qxVfLoaMWiVZxwODi', NULL, '2022-09-23 18:40:55', '2022-09-23 18:40:55');
 
 --
 -- Indexes for dumped tables
@@ -265,6 +442,12 @@ ALTER TABLE `companies`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `menus`
+--
+ALTER TABLE `menus`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -299,6 +482,30 @@ ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product_tags`
+--
+ALTER TABLE `product_tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -313,13 +520,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -328,10 +535,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `menus`
+--
+ALTER TABLE `menus`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -343,19 +556,43 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `product_tags`
+--
+ALTER TABLE `product_tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
