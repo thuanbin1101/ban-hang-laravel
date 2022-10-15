@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UserController;
@@ -48,6 +49,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('menus', MenuController::class);
     Route::resource('sliders', SliderController::class);
     Route::resource('settings', SettingController::class);
+    Route::resource('roles', RoleController::class);
 });
 
 

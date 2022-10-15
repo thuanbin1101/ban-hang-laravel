@@ -3,19 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+    use DeleteModelTrait;
 
     private User $user;
+    private Role $role;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Role $role)
     {
         $this->user = $user;
+        $this->role = $role;
     }
 
     /**
@@ -25,6 +32,7 @@ class UserController extends Controller
      */
     public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
+        $this->authorize('index_user'); // Gate
         $users = User::query()->latest('id')->paginate(10);
         return view('admin.users.index', [
             'users' => $users
@@ -34,11 +42,16 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
-        return view('admin.users.create');
+        $this->authorize('create_user'); // Gate
+        $roles = $this->role::query()->get();
+        return view('admin.users.create', [
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -49,13 +62,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $userCreate = [
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-        ];
-        $this->user::query()->create($userCreate);
-        return redirect()->route('users.create')->with('success', "Successfully Added");
+        try {
+            DB::beginTransaction();
+            $dataCreate = [
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+            ];
+            $user = $this->user::query()->create($dataCreate);
+            $user->roles()->attach($request->get('role_id'));
+            DB::commit();
+            return redirect()->route('users.create')->with('success', "Successfully Added");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+        }
     }
 
     /**
@@ -78,8 +100,12 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user::query()->find($id);
-        return view('admin.users.edit',[
-            'user'=>$user
+        $roleOfUser = $user->roles;
+        $roles = $this->role::query()->get();
+        return view('admin.users.edit', [
+            'user' => $user,
+            'roleOfUser' => $roleOfUser,
+            'roles' => $roles
         ]);
     }
 
@@ -92,29 +118,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $userUpdate = [
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-        ];
-        $this->user::query()->find($id)->update($userUpdate);
-        return redirect()->route('users.index')->with('success', "Successfully Edited");
+        try {
+            DB::beginTransaction();
+            $dataCreate = [
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+            ];
+            $password = $request->get('password');
+            if (!empty($password)) {
+                $dataCreate['password'] = Hash::make($password);
+            }
+            $this->user::query()->find($id)->update($dataCreate);
+            $user = $this->user::query()->find($id);
+            $user->roles()->sync($request->get('role_id'));
+            DB::commit();
+            return redirect()->route('users.index')->with('success', "Successfully Edited");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        try {
-            $this->user::query()->find($id)->delete();
-            return response()->json(['code' => 200, 'message' => "Success"]);
-        } catch (Exception $e) {
-            return response()->json(['code' => 500, 'message' => "Fail"], 500);
-            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
-        }
+        return $this->deleteModelTrait($id, $this->user);
     }
 }

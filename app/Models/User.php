@@ -42,6 +42,25 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    }
+
+    public function checkPermissionAccess($permissionCheck): bool
+    {
+        $roles = auth()->user()->roles;
+        foreach ($roles as $role) {
+            $permissions = $role->permissions;
+            if ($permissions->contains('key_code', $permissionCheck)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
