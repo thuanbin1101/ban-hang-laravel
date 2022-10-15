@@ -49,6 +49,16 @@
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
+
+            @auth
+                <a href="" class="btn border">
+                    <i class="fas fa-user text-primary"></i>
+                    <span class="badge">{{Auth::user()->name}}</span>
+                </a>
+            @else
+
+            @endauth
+            
             <a href="" class="btn border">
                 <i class="fas fa-heart text-primary"></i>
                 <span class="badge">0</span>
@@ -107,22 +117,19 @@
                                     </div>
                                 @endif
                             </div>
-                                {{-- <a href="{{ route('client.shop') }}" class="nav-item nav-link">Shop</a>
-                                <a href="{{ route('client.detail') }}" class="nav-item nav-link active">Shop Detail</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="{{ route('client.cart') }}" class="dropdown-item">Shopping Cart</a>
-                                        <a href="{{ route('client.checkout') }}" class="dropdown-item">Checkout</a>
-                                    </div>
-                                </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
                             @endforeach
                         </div>
-                        {{-- <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
-                        </div> --}}
+                        <div class="navbar-nav ml-auto py-0">
+                            @auth
+                                <form action="{{ url('client/logout') }}" method="post">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="nav-item btn btn-primary">Logout</button>
+                                </form>
+                            @else
+                                <a href="{{ url('client/login') }}" class="nav-item nav-link">Login</a>
+                                <a href="" class="nav-item nav-link">Register</a>
+                            @endauth
+                        </div>
                     </div>
                 </nav>
 

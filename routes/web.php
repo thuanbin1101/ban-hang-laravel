@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Client\Auth\LoginController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Middleware\CheckLogin;
 use App\Models\Category;
@@ -52,6 +53,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 
 
+//fe
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 Route::get('/category/{slug}', [HomeController::class, 'ShowCategory'])->name('client.category');
@@ -62,5 +64,13 @@ Route::get('/checkout', [HomeController::class, 'showCheckout'])->name('client.c
 
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('client.detail');
 
+//login 
+Route::get('client/login', [LoginController::class, 'login'])->name('client.login');
 
+Route::post('client/login', [LoginController::class, 'authenticate']);
 
+Route::post('client/logout', [LoginController::class, 'logout']);
+
+//register 
+Route::get('client/register', [LoginController::class, 'register'])->name('client.register');
+Route::post('client/register', [LoginController::class, 'store']);
