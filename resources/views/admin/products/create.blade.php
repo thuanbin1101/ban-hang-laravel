@@ -50,7 +50,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Name Product</label>
-                    <input name="name" value="{{old('name')}}" type="text" class="form-control" id="inputEmail4"
+                    <input name="name" value="{{old('name')}}" type="text" class="form-control" id="inputEmail"
                            placeholder="">
                 </div>
             </div>
@@ -120,6 +120,5 @@
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
     <script src="https://cdn.tiny.cloud/1/o9bdykr38uld5i7zkhn4eqt5oap4d75v9kp7uv58fvs3aijf/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
-
     <script src="{{asset('admin/product/add/add.js')}}"></script>
 @endpush

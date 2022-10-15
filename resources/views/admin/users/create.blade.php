@@ -1,4 +1,13 @@
 @extends('admin.layouts.master')
+@push("css")
+    <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
+    <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #090909;
+        }
+    </style>
+
+@endpush
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -36,7 +45,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Name</label>
-                    <input type="text" name="name" class="form-control" id="inputEmail4" placeholder="Name">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputEmail4" class="col-form-label">Email</label>
@@ -44,7 +53,15 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputPassword4" class="col-form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                    <input name="password" type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="inputPassword4" class="col-form-label">Role</label>
+                    <select name="role_id[]" class="form-control select2-init" multiple id="role_id">
+                        @foreach($roles as $role)
+                            <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -53,3 +70,9 @@
         </form>
     </div>
 @endsection
+@push('script')
+    <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+    <script>
+        $('.select2-init').select2()
+    </script>
+@endpush
