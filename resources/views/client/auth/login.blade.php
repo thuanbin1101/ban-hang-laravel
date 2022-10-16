@@ -5,7 +5,7 @@
 
     </style>
     <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('{{ asset('login/images/bg_1.jpg') }}');"></div>
+        <div class="bg" style="background-image: url('{{ asset('loginClient/images/bg_1.jpg') }}');"></div>
         <div class="contents">
 
             <div class="container">

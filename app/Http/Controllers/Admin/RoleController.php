@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class RoleController extends Controller
 {
+    use DeleteModelTrait;
     private Role $role;
     private Permission $permission;
 
@@ -134,8 +136,8 @@ class RoleController extends Controller
      * @param \App\Models\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        //
+        return $this->deleteModelTrait($id,$this->role);
     }
 }

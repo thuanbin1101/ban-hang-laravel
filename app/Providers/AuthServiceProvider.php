@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Product;
 use App\Models\User;
+use App\Services\PermissionGateAndPolicyAccess;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,11 +28,18 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::define('create_user', function (User $user) {
-            return $user->checkPermissionAccess(config('permissions.access.create_user'));
-        });
-        Gate::define('index_user', function (User $user) {
-            return $user->checkPermissionAccess(config('permissions.access.index_user'));
+        // khoi tao permission cho quyen
+        $permissionGateAndPolicy = new PermissionGateAndPolicyAccess();
+        $permissionGateAndPolicy->setGateAndPolicy();
+
+        Gate::define('edit_product', function (User $user, $id) {
+            $product = Product::query()->find($id);
+            if ($user->checkPermissionAccess(config('permissions.access.edit_product')) && $user->id === $product->user_id) {
+                return true;
+            }
+            return false;
         });
     }
+
+
 }

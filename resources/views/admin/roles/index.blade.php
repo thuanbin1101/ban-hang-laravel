@@ -58,7 +58,7 @@
                             @method("DELETE")
                             @csrf
                             <a href="javascript:{}" data-url="{{route('roles.destroy',$each->id)}}"
-                               class="action-icon slider-delete"> <i class="mdi mdi-delete"></i></a>
+                               class="action-icon role-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -69,5 +69,5 @@
     {!!$roles->links()!!}
 @endsection
 @push('script')
-    <script src="{{asset('admin/slider/index/list.js')}}"></script>
+    <script src="{{asset('admin/role/index/list.js')}}"></script>
 @endpush

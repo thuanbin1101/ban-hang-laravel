@@ -1,12 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\UserController;
+
 use App\Http\Controllers\Client\Auth\LoginController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Middleware\CheckLogin;
@@ -38,23 +32,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.layouts.master');
-    })->name('home');
-    Route::resource('categories', CategoryController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('menus', MenuController::class);
-    Route::resource('sliders', SliderController::class);
-    Route::resource('settings', SettingController::class);
-    Route::resource('roles', RoleController::class);
-});
-
-
-
 //fe
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
@@ -66,13 +43,13 @@ Route::get('/checkout', [HomeController::class, 'showCheckout'])->name('client.c
 
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('client.detail');
 
-//login 
+//login
 Route::get('client/login', [LoginController::class, 'login'])->name('client.login');
 
 Route::post('client/login', [LoginController::class, 'authenticate']);
 
 Route::post('client/logout', [LoginController::class, 'logout']);
 
-//register 
+//register
 Route::get('client/register', [LoginController::class, 'register'])->name('client.register');
 Route::post('client/register', [LoginController::class, 'store']);

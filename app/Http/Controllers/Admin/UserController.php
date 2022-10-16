@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        $this->authorize('index_user'); // Gate
+        $this->authorize('list_user'); // Gate
         $users = User::query()->latest('id')->paginate(10);
         return view('admin.users.index', [
             'users' => $users
@@ -99,6 +99,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('edit_user'); // Gate
         $user = $this->user::query()->find($id);
         $roleOfUser = $user->roles;
         $roles = $this->role::query()->get();
@@ -148,6 +149,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete_user'); // Gate
         return $this->deleteModelTrait($id, $this->user);
     }
 }

@@ -39,5 +39,5 @@ function actionDelete(event) {
 }
 
 $(function () {
-    $(document).on('click', '.setting-delete', actionDelete)
+    $(document).on('click', '.role-delete', actionDelete)
 })

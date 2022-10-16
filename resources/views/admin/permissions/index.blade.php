@@ -21,7 +21,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">List Users</h4>
+                <h4 class="page-title">List Roles</h4>
             </div>
         </div>
     </div>
@@ -34,34 +34,31 @@
         <table class="table table-striped table-centered mb-0">
             <thead>
             <tr>
-                <th>User</th>
-                <th>Account No.</th>
-                <th>Email</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Display Name</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $each)
+            @foreach($roles as $each)
                 <tr>
+                    <td>{{$each->id}}</td>
                     <td class="table-user">
-                        <img src="{{asset('admin/assets/images/users/avatar-2.jpg')}}" alt="table-user"
-                             class="mr-2 rounded-circle"/>
                         {{$each->name}}
                     </td>
-                    <td>{{$each->id}}</td>
-                    <td>{{$each->email}}</td>
+                    <td class="table-user">
+                        {{$each->display_name}}
+                    </td>
                     <td class="table-action">
-                        <a href="{{route('users.edit',$each->id)}}" class="action-icon"> <i
+                        <a href="{{route('roles.edit',$each->id)}}" class="action-icon"> <i
                                 class="mdi mdi-pencil"></i></a>
-                        <form style="display: inline" id="my_form" action="{{route('users.destroy',$each->id)}}"
+                        <form style="display: inline" id="my_form" action="{{route('roles.destroy',$each->id)}}"
                               method="POST">
                             @method("DELETE")
                             @csrf
-                            @can('delete_user')
-                                <a href="javascript:{}" data-url="{{route('users.destroy',$each->id)}}"
-                                   class="action-icon user-delete"> <i class="mdi mdi-delete"></i></a>
-                            @endcan
-
+                            <a href="javascript:{}" data-url="{{route('roles.destroy',$each->id)}}"
+                               class="action-icon slider-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -69,8 +66,8 @@
             </tbody>
         </table>
     </div><br>
-    {!!$users->links()!!}
+    {!!$roles->links()!!}
 @endsection
 @push('script')
-    <script src="{{asset('admin/user/index/list.js')}}"></script>
+    <script src="{{asset('admin/slider/index/list.js')}}"></script>
 @endpush

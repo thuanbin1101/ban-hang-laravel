@@ -145,6 +145,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('edit_product',$id); // Gate
         $product = $this->product->query()->find($id); // tim san pham co ID la 1
         $htmlOptionCategory = $this->getCategory($product->category_id);
         return view('admin.products.edit', [
