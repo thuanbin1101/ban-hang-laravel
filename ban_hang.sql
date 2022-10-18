@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 13, 2022 at 12:18 PM
+-- Generation Time: Oct 18, 2022 at 11:29 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.9
 
@@ -169,7 +169,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (34, '2022_10_13_070529_create_roles_table', 14),
 (35, '2022_10_13_070645_create_permissions_table', 14),
 (36, '2022_10_13_070850_create_table_user_role', 14),
-(37, '2022_10_13_070930_create_table_permission_role', 14);
+(37, '2022_10_13_070930_create_table_permission_role', 14),
+(39, '2022_10_15_081747_add_parent_id_column_to_permission_table', 15),
+(43, '2022_10_15_094831_add_keycode_column_to_permissions_table', 16);
 
 -- --------------------------------------------------------
 
@@ -193,9 +195,52 @@ CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `display_name`, `key_code`, `parent_id`, `created_at`, `updated_at`) VALUES
+(13, 'user', 'user', NULL, 0, '2022-10-16 00:00:59', '2022-10-16 00:00:59'),
+(14, 'list user', 'list user', 'list_user', 13, '2022-10-16 00:00:59', '2022-10-16 00:00:59'),
+(15, 'create user', 'create user', 'create_user', 13, '2022-10-16 00:00:59', '2022-10-16 00:00:59'),
+(16, 'edit user', 'edit user', 'edit_user', 13, '2022-10-16 00:00:59', '2022-10-16 00:00:59'),
+(17, 'delete user', 'delete user', 'delete_user', 13, '2022-10-16 00:00:59', '2022-10-16 00:00:59'),
+(26, 'slider', 'slider', NULL, 0, '2022-10-16 00:20:07', '2022-10-16 00:20:07'),
+(27, 'list slider', 'list slider', 'list_slider', 26, '2022-10-16 00:20:07', '2022-10-16 00:20:07'),
+(28, 'create slider', 'create slider', 'create_slider', 26, '2022-10-16 00:20:07', '2022-10-16 00:20:07'),
+(29, 'edit slider', 'edit slider', 'edit_slider', 26, '2022-10-16 00:20:07', '2022-10-16 00:20:07'),
+(30, 'delete slider', 'delete slider', 'delete_slider', 26, '2022-10-16 00:20:07', '2022-10-16 00:20:07'),
+(31, 'menu', 'menu', NULL, 0, '2022-10-16 00:20:17', '2022-10-16 00:20:17'),
+(32, 'list menu', 'list menu', 'list_menu', 31, '2022-10-16 00:20:17', '2022-10-16 00:20:17'),
+(33, 'create menu', 'create menu', 'create_menu', 31, '2022-10-16 00:20:17', '2022-10-16 00:20:17'),
+(34, 'edit menu', 'edit menu', 'edit_menu', 31, '2022-10-16 00:20:17', '2022-10-16 00:20:17'),
+(35, 'delete menu', 'delete menu', 'delete_menu', 31, '2022-10-16 00:20:17', '2022-10-16 00:20:17'),
+(36, 'product', 'product', NULL, 0, '2022-10-16 00:20:20', '2022-10-16 00:20:20'),
+(37, 'list product', 'list product', 'list_product', 36, '2022-10-16 00:20:20', '2022-10-16 00:20:20'),
+(38, 'create product', 'create product', 'create_product', 36, '2022-10-16 00:20:20', '2022-10-16 00:20:20'),
+(39, 'edit product', 'edit product', 'edit_product', 36, '2022-10-16 00:20:20', '2022-10-16 00:20:20'),
+(40, 'delete product', 'delete product', 'delete_product', 36, '2022-10-16 00:20:20', '2022-10-16 00:20:20'),
+(41, 'setting', 'setting', NULL, 0, '2022-10-16 00:20:23', '2022-10-16 00:20:23'),
+(42, 'list setting', 'list setting', 'list_setting', 41, '2022-10-16 00:20:23', '2022-10-16 00:20:23'),
+(43, 'create setting', 'create setting', 'create_setting', 41, '2022-10-16 00:20:23', '2022-10-16 00:20:23'),
+(44, 'edit setting', 'edit setting', 'edit_setting', 41, '2022-10-16 00:20:23', '2022-10-16 00:20:23'),
+(45, 'delete setting', 'delete setting', 'delete_setting', 41, '2022-10-16 00:20:23', '2022-10-16 00:20:23'),
+(46, 'role', 'role', NULL, 0, '2022-10-16 00:20:29', '2022-10-16 00:20:29'),
+(47, 'list role', 'list role', 'list_role', 46, '2022-10-16 00:20:29', '2022-10-16 00:20:29'),
+(48, 'create role', 'create role', 'create_role', 46, '2022-10-16 00:20:29', '2022-10-16 00:20:29'),
+(49, 'edit role', 'edit role', 'edit_role', 46, '2022-10-16 00:20:29', '2022-10-16 00:20:29'),
+(50, 'delete role', 'delete role', 'delete_role', 46, '2022-10-16 00:20:29', '2022-10-16 00:20:29'),
+(51, 'category', 'category', NULL, 0, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
+(52, 'list category', 'list category', 'list_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
+(53, 'create category', 'create category', 'create_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
+(54, 'edit category', 'edit category', 'edit_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
+(55, 'delete category', 'delete category', 'delete_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04');
 
 -- --------------------------------------------------------
 
@@ -210,6 +255,97 @@ CREATE TABLE `permission_role` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permission_role`
+--
+
+INSERT INTO `permission_role` (`id`, `role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
+(1, 6, 2, NULL, NULL),
+(2, 6, 3, NULL, NULL),
+(3, 6, 5, NULL, NULL),
+(4, 6, 6, NULL, NULL),
+(5, 7, 3, NULL, NULL),
+(13, 1, 15, NULL, NULL),
+(16, 1, 27, NULL, NULL),
+(17, 1, 28, NULL, NULL),
+(18, 1, 29, NULL, NULL),
+(19, 1, 30, NULL, NULL),
+(20, 1, 32, NULL, NULL),
+(21, 1, 33, NULL, NULL),
+(22, 1, 34, NULL, NULL),
+(23, 1, 35, NULL, NULL),
+(24, 1, 37, NULL, NULL),
+(25, 1, 38, NULL, NULL),
+(26, 1, 39, NULL, NULL),
+(27, 1, 40, NULL, NULL),
+(28, 1, 42, NULL, NULL),
+(29, 1, 43, NULL, NULL),
+(30, 1, 44, NULL, NULL),
+(31, 1, 45, NULL, NULL),
+(32, 1, 47, NULL, NULL),
+(33, 1, 48, NULL, NULL),
+(34, 1, 49, NULL, NULL),
+(35, 1, 50, NULL, NULL),
+(36, 1, 52, NULL, NULL),
+(37, 1, 53, NULL, NULL),
+(38, 1, 54, NULL, NULL),
+(39, 1, 55, NULL, NULL),
+(40, 2, 27, NULL, NULL),
+(41, 2, 28, NULL, NULL),
+(42, 2, 29, NULL, NULL),
+(43, 2, 30, NULL, NULL),
+(44, 2, 32, NULL, NULL),
+(45, 2, 33, NULL, NULL),
+(46, 2, 34, NULL, NULL),
+(47, 2, 35, NULL, NULL),
+(48, 2, 37, NULL, NULL),
+(49, 2, 38, NULL, NULL),
+(50, 2, 39, NULL, NULL),
+(51, 2, 40, NULL, NULL),
+(52, 2, 52, NULL, NULL),
+(53, 2, 53, NULL, NULL),
+(54, 2, 54, NULL, NULL),
+(55, 2, 55, NULL, NULL),
+(56, 3, 37, NULL, NULL),
+(57, 3, 38, NULL, NULL),
+(58, 3, 39, NULL, NULL),
+(59, 3, 40, NULL, NULL),
+(60, 3, 52, NULL, NULL),
+(61, 3, 53, NULL, NULL),
+(62, 3, 54, NULL, NULL),
+(63, 3, 55, NULL, NULL),
+(64, 4, 14, NULL, NULL),
+(65, 4, 15, NULL, NULL),
+(66, 4, 16, NULL, NULL),
+(67, 4, 17, NULL, NULL),
+(68, 4, 27, NULL, NULL),
+(69, 4, 28, NULL, NULL),
+(70, 4, 29, NULL, NULL),
+(71, 4, 30, NULL, NULL),
+(72, 4, 32, NULL, NULL),
+(73, 4, 33, NULL, NULL),
+(74, 4, 34, NULL, NULL),
+(75, 4, 35, NULL, NULL),
+(76, 4, 37, NULL, NULL),
+(77, 4, 38, NULL, NULL),
+(78, 4, 39, NULL, NULL),
+(79, 4, 40, NULL, NULL),
+(80, 4, 42, NULL, NULL),
+(81, 4, 43, NULL, NULL),
+(82, 4, 44, NULL, NULL),
+(83, 4, 45, NULL, NULL),
+(84, 4, 52, NULL, NULL),
+(85, 4, 53, NULL, NULL),
+(86, 4, 54, NULL, NULL),
+(87, 4, 55, NULL, NULL),
+(88, 14, 37, NULL, NULL),
+(89, 14, 38, NULL, NULL),
+(90, 14, 39, NULL, NULL),
+(91, 14, 40, NULL, NULL),
+(92, 1, 16, NULL, NULL),
+(93, 1, 14, NULL, NULL),
+(94, 1, 17, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -370,10 +506,11 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Quản trị hệ thống', NULL, NULL),
-(2, 'guest', 'Khách hàng', NULL, NULL),
-(3, 'developer', 'Phát triển hệ thống', NULL, NULL),
-(4, 'content', 'Phát triển nội dung', NULL, NULL);
+(1, 'Admin', 'Quản lý', NULL, '2022-10-16 00:23:43'),
+(2, 'Content', 'Phát triển nội dung', NULL, '2022-10-16 00:23:38'),
+(3, 'Saler', 'Bán hàng', NULL, '2022-10-16 00:23:11'),
+(4, 'Developer', 'Phát triển hệ thống', NULL, '2022-10-16 00:24:16'),
+(14, 'Guest', 'Khách hàng', '2022-10-16 00:45:01', '2022-10-16 00:45:01');
 
 -- --------------------------------------------------------
 
@@ -388,6 +525,15 @@ CREATE TABLE `role_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_user`
+--
+
+INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 47, NULL, NULL),
+(3, 2, 47, NULL, NULL),
+(4, 1, 31, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -514,13 +660,14 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (28, 'Prof. Nadia Prohaska', 'leffler.glenda@example.com', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'diK7l1XkGt', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
 (29, 'Prof. Jovany Lang MD', 'chet80@example.net', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '75Z5Dpxtau', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
 (30, 'Kiera Wunsch', 'jgusikowski@example.org', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Vd9kCxXAQ7', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(31, 'thuan', 'thuan@gmail.com', NULL, '$2y$10$FWSjy84yYinNCsbvaZIl8eU7OrhDb4k8A2RhI59YeVKsvr8LpmjN2', 'ffX3qNgA0C19VfCDdo5hG1p9ry1yoTWV84G6V0RNxXFiNoba8m2TAZPFLQC3', '2022-09-10 21:20:12', '2022-09-10 21:20:12'),
+(31, 'thuan', 'thuan@gmail.com', NULL, '$2y$10$FWSjy84yYinNCsbvaZIl8eU7OrhDb4k8A2RhI59YeVKsvr8LpmjN2', '8nTWPUj4sVB9yO53Uag2Qv9ZcNO4rsJ8hwcIgrf7ROFp31EGxL6h5rH27vvN', '2022-09-10 21:20:12', '2022-09-10 21:20:12'),
 (32, 'ken', 'ken@gmail.com', NULL, '$2y$10$6.Q6iJUwzqCtYiaHZ81MwOsV4DKNCQJcoVGSN/.tNQ3mKM2Bg7JYK', NULL, '2022-09-20 21:01:28', '2022-09-20 21:01:28'),
 (33, 'ken', 'ken123@gmail.com', NULL, '$2y$10$2OoQo53WUGBKVjq9Jxa8uOAG7hX8snO/6T.DVhR8tkHDpMZdQFBPG', NULL, '2022-09-20 21:02:42', '2022-09-20 21:02:42'),
 (35, 'zczxc', '123@gmail.com', NULL, '$2y$10$vnnLjXhJ1KOiGVRg/DyIkuOsvac8wFjYyPInzocRoViIeAM51TuDm', NULL, '2022-09-21 07:26:20', '2022-09-21 07:26:20'),
 (36, 'zxc', '111@gmail.com', NULL, '$2y$10$Jc/55uTpkEDfm2uWpXiEuuh1ul7iAYg00ktsshuT791QMm/AkBfly', NULL, '2022-09-22 08:10:17', '2022-09-22 08:10:17'),
-(38, 'thai', 'thai@gmail.com', NULL, '$2y$10$.VOdjZ5QN.wpujGZLnkMw.GD8aDEYoSrtTq/qxVfLoaMWiVZxwODi', NULL, '2022-09-23 18:40:55', '2022-09-23 18:40:55'),
-(41, 'Tu Phan', 'clgtqwe1@gmail.com', NULL, '$2y$10$jKLqwj2vHJvVgzZLKERIruodZ3TGHQSELi8MlY9QWrTlbSN0aozcW', NULL, '2022-10-08 00:57:45', '2022-10-08 00:57:45');
+(41, 'Tu Phan', 'clgtqwe1@gmail.com', NULL, '$2y$10$jKLqwj2vHJvVgzZLKERIruodZ3TGHQSELi8MlY9QWrTlbSN0aozcW', NULL, '2022-10-08 00:57:45', '2022-10-08 00:57:45'),
+(42, 'thuan123', 'thuan@gmaisdfal.com', NULL, '$2y$10$3phxJYUwFbjhwn9o3e5TcOKONn/6lgLR5eU62DjpG45LeAGLiPaw2', NULL, '2022-10-13 08:21:15', '2022-10-14 21:17:14'),
+(47, 'àgfsdgfdg12345', 'adsasdasd@gmail.com12345', NULL, '$2y$10$McF2OAfMcBY4PO/aB8bWxudGQQRbACwXloq8rWduO1RGRy25NSuaK', NULL, '2022-10-13 08:30:57', '2022-10-14 21:15:39');
 
 --
 -- Indexes for dumped tables
@@ -670,19 +817,19 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `permission_role`
 --
 ALTER TABLE `permission_role`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -712,13 +859,13 @@ ALTER TABLE `product_tags`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -742,7 +889,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
