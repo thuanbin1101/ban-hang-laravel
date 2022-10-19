@@ -24,7 +24,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">Update Role</h4>
+                <h4 class="page-title">Edit Permission</h4>
             </div>
         </div>
     </div>
@@ -47,69 +47,43 @@
         </div>
     @endif
     <div class="row">
-        <form class="col-md-12" method="POST" action="{{route('roles.update',$role->id)}}">
+        <form class="col-md-12" method="POST" action="{{route('permissions.update',$permission->id)}}"
+              enctype="multipart/form-data">
             @csrf
-            @method("PUT")
+            @method('PUT')
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputEmail4" class="col-form-label">Name Role</label>
-                    <input name="name" value="{{$role->name}}" type="text" class="form-control" id="inputEmail4"
+                    <label for="inputEmail4" class="col-form-label">Name Permission</label>
+                    <input name="name" value="{{$permission->name}}" type="text" class="form-control" id="inputEmail4"
                            placeholder="">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputEmail4" class="col-form-label">Description Role</label>
-                    <input name="display_name" value="{{$role->display_name}}" type="text" class="form-control"
-                           id="inputEmail4"
-                           placeholder="">
+                    <label for="inputEmail4" class="col-form-label">DisplayName Permission</label>
+                    <input name="display_name" value="{{$permission->display_name}}" type="text" class="form-control"
+                           id="inputEmail4" placeholder="">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="">
-                        <input type="checkbox" class="check-all">
-                        Check All
-                    </label>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4" class="col-form-label">Key Code Permission</label>
+                    <input name="key_code" type="text" value="{{$permission->key_code}}" class="form-control"
+                           id="inputEmail4" placeholder="">
                 </div>
-                @foreach($permissionParent as $perParent)
-                    <div class="col-md-12 col-lg-12">
-                        <!-- Simple card -->
-                        <div class="card d-block">
-                            <div class="card-header" style="background-color: #42d29d;color: white;">
-                                <h4 class="card-title" style="transform: translateY(12px);">
-                                    <label for="">
-                                        <input type="checkbox" class="checkbox-wrapper">
-                                    </label>
-                                    {{$perParent->name}}
-                                </h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    @foreach($perParent->permissionsChildrent as $perChildrent)
-                                        <h5 class="card-title col-md-3" style="transform: translateY(12px);">
-                                            <label for="">
-                                                <input name="permission_id[]" multiple class="checkbox-childrent"
-                                                       type="checkbox"
-                                                       {{$roleOfPermission->contains('id',$perChildrent->id) ? 'checked' : ''}}
-                                                       value="{{$perChildrent->id}}">
-                                            </label>
-                                            {{$perChildrent->name}}
-                                        </h5>
-                                    @endforeach
-                                </div>
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div><!-- end col -->
-
-                @endforeach
             </div>
-
+            <div class="form-group">
+                <label for="inputPassword5" class="col-form-label">Select Parent Permission</label>
+                <select name="parent_id" class="custom-select mb-3">
+                    <option selected value="0">Parent Menu</option>
+                    {!!    $htmlOptionPermission !!}
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 @endsection
+
 @push('script')
     <script src="{{asset('admin/role/create/create.js')}}"></script>
 @endpush

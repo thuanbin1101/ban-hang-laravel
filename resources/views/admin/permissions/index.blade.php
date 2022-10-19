@@ -21,7 +21,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">List Roles</h4>
+                <h4 class="page-title">List Permissions</h4>
             </div>
         </div>
     </div>
@@ -37,11 +37,12 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Display Name</th>
+                <th>Keycode</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($roles as $each)
+            @foreach($permissions as $each)
                 <tr>
                     <td>{{$each->id}}</td>
                     <td class="table-user">
@@ -50,15 +51,18 @@
                     <td class="table-user">
                         {{$each->display_name}}
                     </td>
+                    <td class="table-user">
+                        {{$each->key_code}}
+                    </td>
                     <td class="table-action">
-                        <a href="{{route('roles.edit',$each->id)}}" class="action-icon"> <i
+                        <a href="{{route('permissions.edit',$each->id)}}" class="action-icon"> <i
                                 class="mdi mdi-pencil"></i></a>
-                        <form style="display: inline" id="my_form" action="{{route('roles.destroy',$each->id)}}"
+                        <form style="display: inline" id="my_form" action="{{route('permissions.destroy',$each->id)}}"
                               method="POST">
                             @method("DELETE")
                             @csrf
-                            <a href="javascript:{}" data-url="{{route('roles.destroy',$each->id)}}"
-                               class="action-icon slider-delete"> <i class="mdi mdi-delete"></i></a>
+                            <a href="javascript:{}" data-url="{{route('permissions.destroy',$each->id)}}"
+                               class="action-icon permission-delete"> <i class="mdi mdi-delete"></i></a>
                         </form>
                     </td>
                 </tr>
@@ -66,8 +70,8 @@
             </tbody>
         </table>
     </div><br>
-    {!!$roles->links()!!}
+    {!!$permissions->links()!!}
 @endsection
 @push('script')
-    <script src="{{asset('admin/slider/index/list.js')}}"></script>
+    <script src="{{asset('admin/permission/index/list.js')}}"></script>
 @endpush

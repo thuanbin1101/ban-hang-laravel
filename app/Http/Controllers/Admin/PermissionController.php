@@ -2,30 +2,37 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Components\PermissionRecursive;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PermissionController extends Controller
 {
 
     private Permission $permission;
+    private PermissionRecursive $permissionRecursive;
 
-    public function __construct(Permission $permission)
+    public function __construct(Permission $permission, PermissionRecursive $permissionRecursive)
     {
         $this->permission = $permission;
+        $this->permissionRecursive = $permissionRecursive;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        $permissions = $this->permission::query()->latest()->paginate();
+        return view('admin.permissions.index', [
+            'permissions' => $permissions
+        ]);
     }
 
     /**
@@ -35,6 +42,11 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        $htmlOptionPermission = $this->permissionRecursive->permissionRecursiveAdd();
+        return view('admin.permissions.create', [
+            'htmlOptionPermission' => $htmlOptionPermission
+        ]);
+
         return view('admin.permissions.create');
     }
 
@@ -48,24 +60,15 @@ class PermissionController extends Controller
     {
         try {
             DB::beginTransaction();
-            $permissionParentCreate = $this->permission::query()->create([
-                'name' => $request->get('module_parent'),
-                'display_name' => $request->get('module_parent'),
-                'parent_id' => 0
+            $this->permission::query()->create([
+                'name' => $request->get('name'),
+                'parent_id' => $request->get('parent_id'),
+                'display_name' => $request->get('display_name'),
+                'key_code' => $request->get('key_code')
             ]);
-            foreach ($request->get('module_children') as $value) {
-                $this->permission::query()->create([
-                    'name' => $value . ' ' . $request->get('module_parent'),
-                    'display_name' => $value . ' ' . $request->get('module_parent'),
-                    'parent_id' => $permissionParentCreate->id,
-                    'key_code' => $value . '_' . $request->get('module_parent')
-                ]);
-            }
             DB::commit();
             return redirect()->route('permissions.create')->with('success', "Successfully Added");
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
             Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
             return redirect()->route('permissions.create')->with('fail', "Fail Added");
@@ -91,7 +94,11 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        $htmlOptionPermission = $this->permissionRecursive->permissionRecursiveEdit($permission->parent_id);
+        return view('admin.permissions.edit', [
+            'permission' => $permission,
+            'htmlOptionPermission' => $htmlOptionPermission
+        ]);
     }
 
     /**
@@ -101,19 +108,39 @@ class PermissionController extends Controller
      * @param \App\Models\Permission $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $this->permission::query()->find($id)->update([
+                'name' => $request->get('name'),
+                'parent_id' => $request->get('parent_id'),
+                'display_name' => $request->get('display_name'),
+                'key_code' => $request->get('key_code')
+            ]);
+            DB::commit();
+            return redirect()->route('permissions.index')->with('success', "Successfully Edited");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+            return redirect()->route('permissions.index')->with('fail', "Fail Edited");
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Permission $permission
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Permission $permission)
+    public function destroy($id)
     {
-        //
+        try {
+            $this->permission::query()->find($id)->delete();
+            return response()->json(['code' => 200, 'message' => "Success"]);
+        } catch (Exception $e) {
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+        }
     }
 }

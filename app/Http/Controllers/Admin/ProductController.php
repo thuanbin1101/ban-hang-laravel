@@ -67,8 +67,10 @@ class ProductController extends Controller
     public function create()
     {
         $htmlOptionCategory = $this->getCategory("");
+        $tags = $this->tag::query()->get();
         return view('admin.products.create', [
-            'htmlOptionCategory' => $htmlOptionCategory
+            'htmlOptionCategory' => $htmlOptionCategory,
+            'tags' => $tags
         ]);
     }
 
@@ -145,7 +147,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('edit_product',$id); // Gate
+        $this->authorize('edit_product', $id); // Gate
         $product = $this->product->query()->find($id); // tim san pham co ID la 1
         $htmlOptionCategory = $this->getCategory($product->category_id);
         return view('admin.products.edit', [

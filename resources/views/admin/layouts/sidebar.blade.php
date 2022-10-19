@@ -157,6 +157,9 @@
                         <a href="{{route('roles.create')}}">Create Role</a>
                     </li>
                     <li>
+                        <a href="{{route('permissions.index')}}">List Permissions</a>
+                    </li>
+                    <li>
                         <a href="{{route('permissions.create')}}">Create Permission</a>
                     </li>
                 </ul>

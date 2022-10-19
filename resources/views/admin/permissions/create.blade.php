@@ -50,41 +50,66 @@
         <form class="col-md-12" method="POST" action="{{route('permissions.store')}}"
               enctype="multipart/form-data">
             @csrf
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4" class="col-form-label">Name Permission</label>
+                    <input name="name" type="text" class="form-control" id="inputEmail4" placeholder="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4" class="col-form-label">DisplayName Permission</label>
+                    <input name="display_name" type="text" class="form-control" id="inputEmail4" placeholder="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4" class="col-form-label">Key Code Permission</label>
+                    <input name="key_code" type="text" class="form-control" id="inputEmail4" placeholder="">
+                </div>
+            </div>
+            {{--            <div class="form-group">--}}
+            {{--                <label for="inputPassword5" class="col-form-label">Select Module</label>--}}
+            {{--                <select name="module_parent" class="custom-select mb-3">--}}
+            {{--                    <option value="">Select Module</option>--}}
+            {{--                    @foreach(config('permissions.table_module')  as $moduleItem)--}}
+            {{--                        <option value="{{$moduleItem}}">{{$moduleItem}}</option>--}}
+            {{--                    @endforeach--}}
+            {{--                </select>--}}
+            {{--            </div>--}}
             <div class="form-group">
-                <label for="inputPassword5" class="col-form-label">Select Module</label>
-                <select name="module_parent" class="custom-select mb-3">
-                    <option value="">Select Module</option>
-                    @foreach(config('permissions.table_module')  as $moduleItem)
-                        <option value="{{$moduleItem}}">{{$moduleItem}}</option>
-                    @endforeach
+                <label for="inputPassword5" class="col-form-label">Select Parent Permission</label>
+                <select name="parent_id" class="custom-select mb-3">
+                    <option selected value="0">Parent Menu</option>
+                    {!!    $htmlOptionPermission !!}
                 </select>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Simple card -->
-                    <div class="card d-block">
-                        <div class="card-header" style="background-color: #42d29d;color: white;">
-                            <h4 class="card-title" style="transform: translateY(12px);">
-                                <label>
-                                    <input type="checkbox" class="check-all">
-                                    Check All
-                                </label>
-                            </h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                @foreach(config('permissions.module_children') as $moduleChildren)
-                                    <div class="col-md-3">
-                                        <label>
-                                            <input name="module_children[]" value="{{$moduleChildren}}" type="checkbox"
-                                                   class="checkbox-childrent">
-                                            {{$moduleChildren}}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
+{{--                    <div class="card d-block">--}}
+{{--                        <div class="card-header" style="background-color: #42d29d;color: white;">--}}
+{{--                            <h4 class="card-title" style="transform: translateY(12px);">--}}
+{{--                                <label>--}}
+{{--                                    <input type="checkbox" class="check-all">--}}
+{{--                                    Check All--}}
+{{--                                </label>--}}
+{{--                            </h4>--}}
+{{--                        </div>--}}
+{{--                        <div class="card-body">--}}
+{{--                            <div class="row">--}}
+{{--                                @foreach(config('permissions.module_children') as $moduleChildren)--}}
+{{--                                    <div class="col-md-3">--}}
+{{--                                        <label>--}}
+{{--                                            <input name="module_children[]" value="{{$moduleChildren}}" type="checkbox"--}}
+{{--                                                   class="checkbox-childrent">--}}
+{{--                                            {{$moduleChildren}}--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
+{{--                        </div> <!-- end card-body-->--}}
+{{--                    </div> <!-- end card-->--}}
 
                 </div>
 

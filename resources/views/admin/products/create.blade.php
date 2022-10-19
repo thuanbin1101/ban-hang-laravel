@@ -101,9 +101,9 @@
             <div class="form-group">
                 <label for="inputPassword5" class="col-form-label">Select Tag</label>
                 <select name="tags[]" class="form-control tags_select_choose" multiple="multiple">
-                    <option selected="selected">orange</option>
-                    <option>white</option>
-                    <option selected="selected">purple</option>
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->name}}">{{$tag->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
