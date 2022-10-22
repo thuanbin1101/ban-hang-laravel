@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Client\Auth\LoginController;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Middleware\CheckLogin;
 use App\Models\Category;
@@ -37,11 +38,20 @@ Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 Route::get('/category/{slug}', [HomeController::class, 'ShowCategory'])->name('client.category');
 
-Route::get('/cart', [HomeController::class, 'ShowCart'])->name('client.cart');
 
 Route::get('/checkout', [HomeController::class, 'showCheckout'])->name('client.checkout');
 
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('client.detail');
+
+//cart
+Route::post('/add-to-cart/{id}', [CartController::class, 'index'])->name('client.addToCart');
+Route::get('/cart', [CartController::class, 'show'])->name('client.cart');
+Route::post('/update-cart', [CartController::class, 'update'])->name('client.updateCart');
+Route::post('/delete-cart', [CartController::class, 'destroy'])->name('client.deleteCart');
+
+
+
+
 
 //login
 Route::get('client/login', [LoginController::class, 'login'])->name('client.login');

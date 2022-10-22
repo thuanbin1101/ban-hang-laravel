@@ -55,14 +55,17 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail4" class="col-form-label">Amount Product</label>
-                <input type="number" name="amount" class="form-control">
+                <label for="inputEmail4" class="col-form-label">Quantity Product</label>
+                <input type="number" name="quantity" class="form-control">
             </div>
             <div class="form-group">
                 <label for="inputEmail4" class="col-form-label">Price Product</label>
-                <input type="text" name="price" class="form-control" id="currency-field"
-                       pattern="^\d{1,3}(,\d{3})*(\.\d+)?"
-                       value="" data-type="currency" placeholder="VNĐ">
+                <input type="text" name="price" class="form-control"
+                       {{--                       id="currency-field"--}}
+                       {{--                       pattern="^\d{1,3}(,\d{3})*(\.\d+)?"--}}
+                       {{--                       data-type="currency"--}}
+                       value=""
+                       placeholder="VNĐ">
             </div>
 
             <div class="row">

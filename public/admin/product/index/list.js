@@ -19,7 +19,7 @@ function actionDelete(event) {
                 type: "DELETE",
                 url: urlRequest,
                 success: function (data) {
-                    if(data.code === 200){
+                    if (data.code === 200) {
                         that.parent().parent().parent().remove();
                         Swal.fire(
                             'Deleted!',
@@ -38,6 +38,27 @@ function actionDelete(event) {
     })
 }
 
+function actionSearch(event) {
+
+    let valueSearch = $(this).val();
+    let urlRequest = $(this).data('search');
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        url: urlRequest,
+        data: {search: valueSearch},
+        success: function (data) {
+                $('.content-body-table').html(data.data)
+        },
+        error: function (error) {
+            $('.content-body-table').html(error.responseJSON.data)
+        }
+    })
+}
+
 $(function () {
+    $(document).on('keyup', '.search', actionSearch)
     $(document).on('click', '.product-delete', actionDelete)
 })

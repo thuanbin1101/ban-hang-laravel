@@ -88,7 +88,7 @@ class ProductController extends Controller
                 'name' => $request->get('name'),
                 'content' => $request->get('content'),
                 'price' => $request->get('price'),
-                'amount' => $request->get('amount'),
+                'quantity' => $request->get('quantity'),
                 'category_id' => $request->get('category_id'),
                 'user_id' => auth()->id(),
             ];
@@ -170,7 +170,7 @@ class ProductController extends Controller
             $dataProductUpdate = [
                 'name' => $request->get('name'),
                 'content' => $request->get('content'),
-                'amount' => $request->get('amount'),
+                'quantity' => $request->get('quantity'),
                 'price' => $request->get('price'),
                 'category_id' => $request->get('category_id'),
                 'user_id' => auth()->id(),
@@ -228,5 +228,30 @@ class ProductController extends Controller
             return response()->json(['code' => 500, 'message' => "Fail"], 500);
             Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
         }
+    }
+
+    public function search(Request $request): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $valueSearch = $request->get('search');
+            $products = $this->product::query()
+                ->where('name', 'LIKE', "%$valueSearch%")
+                ->orWhere('price', 'LIKE', "%$valueSearch%")
+                ->get();
+            $data = view('admin.products.components.products_component', [
+                'products' => $products
+            ])->render();
+            return response()->json([
+                'code' => 200,
+                'message' => "Success",
+                'data' => $data
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'code' => 500,
+                'message' => $exception->getMessage(),
+            ], 500);
+        }
+
     }
 }

@@ -22,4 +22,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('settings', SettingController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
+    Route::get('search', [ProductController::class,'search'])->name('search.product');
 });
