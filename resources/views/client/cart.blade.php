@@ -58,7 +58,7 @@
                             <h5 class="font-weight-bold">Total</h5>
                             <h5 class="font-weight-bold">{{number_format($totalPrice)}} VNĐ</h5>
                         </div>
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                        <button data-urlcheckout="{{route('client.checkout')}}" id="btnCheckout" class="btn btn-block btn-primary my-3 py-3">Tiến hành thanh toán </button>
                     </div>
                 </div>
             </div>

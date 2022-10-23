@@ -48,6 +48,7 @@ Route::post('/add-to-cart/{id}', [CartController::class, 'index'])->name('client
 Route::get('/cart', [CartController::class, 'show'])->name('client.cart');
 Route::post('/update-cart', [CartController::class, 'update'])->name('client.updateCart');
 Route::post('/delete-cart', [CartController::class, 'destroy'])->name('client.deleteCart');
+Route::post('/checkout-cart', [CartController::class, 'checkoutCart'])->name('client.checkoutCart');
 
 
 

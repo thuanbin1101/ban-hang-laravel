@@ -38,7 +38,15 @@ function actionDeleteCart(e) {
     })
 
 }
+function actionRedirectCheckout(){
+    location.href = $(this).data('urlcheckout');
+}
+function actionCheckoutCart(){
+    $('#formCheckoutCart').submit();
+}
 
 $(function () {
     $(document).on('click', '.delete_cart', actionDeleteCart)
+    $(document).on('click', '#btnCheckout', actionRedirectCheckout)
+    $(document).on('click', '#btnCheckoutCart', actionCheckoutCart)
 })

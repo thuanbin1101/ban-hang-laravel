@@ -2,10 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use PHPUnit\Exception;
 
 class CartService
 {
@@ -105,5 +110,49 @@ class CartService
             'code' => 500,
             'message' => 'Fail'
         ], 500);
+    }
+
+    public function checkout($request)
+    {
+        try {
+            DB::beginTransaction();
+            $customerCreate = Customer::query()->create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'address' => $request->get('address'),
+                'phone' => $request->get('phone'),
+            ]);
+            $carts = Session::get('carts');
+            $this->infoProductCart($carts, $customerCreate->id);
+            DB::commit();
+            Session::flush();
+            Session::flash('success', 'Đặt hàng thành công');
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            Session::flash('error', 'Đặt hàng lỗi, vui lòng thử lại sau');
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+            return false;
+        }
+        return true;
+    }
+
+    public function infoProductCart($carts, $customer_id)
+    {
+        $productIds = array_keys($carts);
+        $products = Product::query()
+            ->select(['id', 'price', 'quantity'])
+            ->whereIn('id', $productIds)
+            ->get();
+        $data = array();
+        foreach ($products as $each) {
+            $data[] = [
+                'customer_id' => $customer_id,
+                'product_id' => $each->id,
+                'quantity' => $carts[$each->id],
+                'price' => $carts[$each->id] * $each->price
+            ];
+        }
+        return Cart::query()->insert($data);
     }
 }

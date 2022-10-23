@@ -25,11 +25,7 @@
             </div>
         </div>
     </div>
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
+    @include('alerts.alert')
     <div class="row">
         <table class="table table-striped table-centered mb-0">
             <thead>

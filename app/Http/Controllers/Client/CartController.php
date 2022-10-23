@@ -120,5 +120,10 @@ class CartController extends Controller
         return $this->cartService->deleteCart($request);
     }
 
+    public function checkoutCart(Request $request)
+    {
+        $this->cartService->checkout($request);
+        return redirect()->back();
+    }
 
 }
