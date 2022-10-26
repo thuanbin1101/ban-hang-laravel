@@ -9,4 +9,7 @@ class Customer extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function carts(){
+        return $this->hasMany(Cart::class,'customer_id','id');
+    }
 }

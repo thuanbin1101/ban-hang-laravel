@@ -1,7 +1,7 @@
 <div class="left-side-menu">
 
     <!-- LOGO -->
-    <a href="index.html" class="logo text-center logo-light">
+    <a href="{{route('home')}}" class="logo text-center logo-light">
                     <span class="logo-lg">
                         <img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="16">
                     </span>
@@ -11,7 +11,7 @@
     </a>
 
     <!-- LOGO -->
-    <a href="index.html" class="logo text-center logo-dark">
+    <a href="{{route('home')}}" class="logo text-center logo-dark">
                     <span class="logo-lg">
                         <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="16">
                     </span>
@@ -25,35 +25,16 @@
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
 
-            <li class="side-nav-title side-nav-item">Navigation</li>
-
+            <li class="side-nav-title side-nav-item">Apps</li>
             <li class="side-nav-item">
-                <a href="javascript: void(0);" class="side-nav-link">
+                <a href="{{route('home')}}" class="side-nav-link">
                     <i class="uil-home-alt"></i>
-                    <span class="badge badge-success float-right">4</span>
                     <span> Dashboards </span>
                 </a>
-                <ul class="side-nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="dashboard-analytics.html">Analytics</a>
-                    </li>
-                    <li>
-                        <a href="dashboard-crm.html">CRM</a>
-                    </li>
-                    <li>
-                        <a href="index.html">Ecommerce</a>
-                    </li>
-                    <li>
-                        <a href="dashboard-projects.html">Projects</a>
-                    </li>
-                </ul>
             </li>
-
-            <li class="side-nav-title side-nav-item">Apps</li>
-
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="uil-users-alt"></i>
                     <span> Users </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -84,7 +65,7 @@
             </li>
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="mdi mdi-package-variant-closed"></i>
                     <span> Products </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -100,7 +81,7 @@
 
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="mdi mdi-xbox-controller-menu"></i>
                     <span> Menus </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -115,7 +96,7 @@
             </li>
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="uil-sliders-v"></i>
                     <span> Sliders </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -130,7 +111,7 @@
             </li>
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="mdi mdi-settings-transfer-outline"></i>
                     <span> Settings </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -145,7 +126,20 @@
             </li>
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="uil-shopping-cart-alt"></i>
+                    <span> Carts </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('customer.list')}}">List Orders</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="uil-shield"></i>
                     <span> Roles Permissions </span>
                     <span class="menu-arrow"></span>
                 </a>

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -121,12 +122,15 @@ class CartService
                 'email' => $request->get('email'),
                 'address' => $request->get('address'),
                 'phone' => $request->get('phone'),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
             $carts = Session::get('carts');
             $this->infoProductCart($carts, $customerCreate->id);
-            DB::commit();
-            Session::flush();
+            Session::forget('carts');
             Session::flash('success', 'Đặt hàng thành công');
+            DB::commit();
+            return true;
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -134,14 +138,13 @@ class CartService
             Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
             return false;
         }
-        return true;
     }
 
     public function infoProductCart($carts, $customer_id)
     {
         $productIds = array_keys($carts);
         $products = Product::query()
-            ->select(['id', 'price', 'quantity'])
+            ->select(['id', 'quantity'])
             ->whereIn('id', $productIds)
             ->get();
         $data = array();
@@ -150,9 +153,21 @@ class CartService
                 'customer_id' => $customer_id,
                 'product_id' => $each->id,
                 'quantity' => $carts[$each->id],
-                'price' => $carts[$each->id] * $each->price
             ];
         }
         return Cart::query()->insert($data);
+    }
+
+
+    public function getCustomer()
+    {
+        return Customer::query()->orderByDesc('id')->paginate(5);
+    }
+
+    public function getProductsForCarts($customer)
+    {
+        return $customer->carts()->with(['product' => function ($query) {
+            $query->select('id', 'name', 'feature_image_path', 'price');
+        }])->get();
     }
 }

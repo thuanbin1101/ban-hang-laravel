@@ -8,7 +8,7 @@
         {{$each->name}}
     </td>
     <td class="">
-        {{$each->price . " VNĐ"}}
+        {{number_format($each->price ). " VNĐ"}}
     </td>
     <td class="">
         {{optional($each->category)->name}}

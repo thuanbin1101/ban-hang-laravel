@@ -44,13 +44,13 @@ class LoginController extends Controller
         ]);
 
         $remember_me = $request->has('remember_me') ? true : false;
- 
+
         if (Auth::attempt($credentials, $remember_me)) {
             $request->session()->regenerate();
- 
+
             return redirect()->intended('/');
         }
- 
+
         return back()->withErrors([
             'email' => 'Email hoặc Password không tìm thấy',
         ])->onlyInput('email');
@@ -62,12 +62,16 @@ class LoginController extends Controller
                 'name' => ['required', 'min:3'],
                 'email' => ['required', 'email'],
                 'password' => ['required'],
+
             ]);
-    
+            dd($credentials);
+
+
+
             $user = User::create($credentials);
-    
+
             auth()->login($user);
-    
+
             return redirect('/');
         } catch (\Throwable $e) {
             return back()->withErrors([
@@ -112,14 +116,14 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-    
+
         $request->session()->invalidate();
-    
+
         $request->session()->regenerateToken();
-    
+
         return redirect('/client/login');
     }
-    
+
 
     /**
      * Update the specified resource in storage.
