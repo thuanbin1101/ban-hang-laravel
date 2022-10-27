@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -33,7 +35,7 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function authenticate(Request $request)
@@ -43,11 +45,30 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        $remember_me = $request->has('remember_me') ? true : false;
 
-        if (Auth::attempt($credentials, $remember_me)) {
-            $request->session()->regenerate();
+//        $remember_me = $request->has('remember_me') ? true : false;
+//        if (Auth::attempt($credentials)) {
+//            if (\auth()->user()->level === 0) {
+//                $request->session()->regenerate();
+//                return redirect()->intended('/');
+//            } else {
+//                Session::flash('error', 'Ban k dang nhap dc');
+//            }
+//        }
+        $check = User::query()->where([
+            'email' => $credentials['email'],
+            'level' => 0
+        ])->exists();
 
+        if (!$check) {
+            return redirect()->intended('client/login');
+        }
+        $dataAttemptClient = [
+            'email' => $credentials['email'],
+            'password' => $credentials['password'],
+            'level' => 0
+        ];
+        if (Auth::attempt($dataAttemptClient)) {
             return redirect()->intended('/');
         }
 
@@ -56,7 +77,8 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $credentials = $request->validate([
                 'name' => ['required', 'min:3'],
@@ -64,14 +86,7 @@ class LoginController extends Controller
                 'password' => ['required'],
 
             ]);
-            dd($credentials);
-
-
-
             $user = User::create($credentials);
-
-            auth()->login($user);
-
             return redirect('/');
         } catch (\Throwable $e) {
             return back()->withErrors([
@@ -94,7 +109,7 @@ class LoginController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -105,7 +120,7 @@ class LoginController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -128,8 +143,8 @@ class LoginController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -140,7 +155,7 @@ class LoginController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

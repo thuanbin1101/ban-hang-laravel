@@ -57,7 +57,7 @@ Route::post('/checkout-cart', [CartController::class, 'checkoutCart'])->name('cl
 //login
 Route::get('client/login', [LoginController::class, 'login'])->name('client.login');
 
-Route::post('client/login', [LoginController::class, 'authenticate']);
+Route::post('client/login', [LoginController::class, 'authenticate'])->name('client.doLogin');
 
 Route::post('client/logout', [LoginController::class, 'logout']);
 
