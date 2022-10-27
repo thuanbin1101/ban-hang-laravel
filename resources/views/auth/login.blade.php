@@ -20,7 +20,9 @@
                             <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
                         </div>
 
-                        <form method="POST" action="{{ route('login') }}">
+
+                        @include('alerts.alert')
+                        <form method="POST" action="{{ route('handleLogin') }}">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email address</label>
@@ -35,11 +37,11 @@
 
                             <div class="form-group">
 
-                                @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}" class="text-muted float-right"><small>Forgot
-                                            your
-                                            password?</small></a>
-                                @endif
+{{--                                @if (Route::has('password.request'))--}}
+{{--                                    <a href="{{ route('password.request') }}" class="text-muted float-right"><small>Forgot--}}
+{{--                                            your--}}
+{{--                                            password?</small></a>--}}
+{{--                                @endif--}}
                                 <label for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input id="password" type="password"

@@ -1,15 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Customer;
+use App\Services\CartService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class HomeController extends Controller
+class CartController extends Controller
 {
+    private CartService $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.home');
+        $customers = $this->cartService->getCustomer();
+        return view('admin.carts.customer', [
+            'customers' => $customers
+        ]);
     }
 
     /**
@@ -30,41 +39,10 @@ class HomeController extends Controller
         //
     }
 
-    public function ShowCategory($slug = ''){
-        $cate_name = Category::where('slug', $slug)->first();
-        $get_data = Category::where('slug', $slug)->with('getProducts')->get();
-        return view('client.categories', [
-            'cate_name' => $cate_name,
-            'products_cate' => $get_data
-        ]);
-    }
-
-
-    public function showCart(){
-        return view('client.cart');
-    }
-
-    public function showCheckout(){
-        $carts = Session::get('carts');
-        return view('client.checkout',[
-            'carts'=>$carts
-        ]);
-    }
-
-    public function getProductDetail($id){
-        $product_detail = Product::where('id', $id)->with('images')->first();
-        return view('client.detail', [
-            'product_detail' => $product_detail
-        ]);
-    }
-
-
-
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -72,23 +50,28 @@ class HomeController extends Controller
         //
     }
 
-
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $customer = Customer::query()->find($id);
+        $carts = $this->cartService->getProductsForCarts($customer);
+
+        return view('admin.carts.detail', [
+            'customer' => $customer,
+            'carts' => $carts
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -99,8 +82,8 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -111,7 +94,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

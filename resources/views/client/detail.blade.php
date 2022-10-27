@@ -38,7 +38,7 @@
                     </div>
                     <small class="pt-1">(50 Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">{{$product_detail->price}}</h3>
+                <h3 class="font-weight-semi-bold mb-4">{{number_format($product_detail->price)}} VNĐ</h3>
                 {!! $product_detail->content !!}
                 {{--                    <div class="d-flex mb-3">--}}
                 {{--                        <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>--}}
@@ -97,14 +97,25 @@
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
+                        <input type="text" name="quantity_product"
+                               class="quantity_product form-control bg-secondary text-center"
+                               value="1">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    @if($product_detail->quantity <= 0)
+                        <button
+                            class="btn btn-primary px-3"> Sản phẩm hiện đang hết hàng
+                        </button>
+                    @else
+                        <button data-urlcart="{{route('client.addToCart',$product_detail->id)}}"
+                                class="btn btn-primary px-3 add_to_cart"><i
+                                class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng
+                        </button>
+                    @endif
                 </div>
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
@@ -128,13 +139,13 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Thông tin</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Đánh giá</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
+                        <h4 class="mb-3">Mô tả sản phẩm</h4>
                         {!! $product_detail->content !!}
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
@@ -245,7 +256,7 @@
     <!-- Products Start -->
     <div class="container-fluid py-5">
         <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+            <h2 class="section-title px-5"><span class="px-2">Có thể bạn thích</span></h2>
         </div>
         <div class="row px-xl-5">
             <div class="col">
@@ -361,3 +372,7 @@
     </div>
     <!-- Products End -->
 @endsection
+@push('js')
+    <script src="{{asset('client/detail/addToCart.js')}}"></script>
+@endpush
+

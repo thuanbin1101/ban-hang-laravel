@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class HomeController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.home');
+        //
     }
 
     /**
@@ -30,37 +27,6 @@ class HomeController extends Controller
         //
     }
 
-    public function ShowCategory($slug = ''){
-        $cate_name = Category::where('slug', $slug)->first();
-        $get_data = Category::where('slug', $slug)->with('getProducts')->get();
-        return view('client.categories', [
-            'cate_name' => $cate_name,
-            'products_cate' => $get_data
-        ]);
-    }
-
-
-    public function showCart(){
-        return view('client.cart');
-    }
-
-    public function showCheckout(){
-        $carts = Session::get('carts');
-        return view('client.checkout',[
-            'carts'=>$carts
-        ]);
-    }
-
-    public function getProductDetail($id){
-        $product_detail = Product::where('id', $id)->with('images')->first();
-        return view('client.detail', [
-            'product_detail' => $product_detail
-        ]);
-    }
-
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,8 +37,6 @@ class HomeController extends Controller
     {
         //
     }
-
-
 
     /**
      * Display the specified resource.

@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\Client\Auth\LoginController;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Middleware\CheckLogin;
 use App\Models\Category;
@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use UniSharp\LaravelFilemanager\Lfm;
+use App\Http\Controllers\Admin\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-     Lfm::routes();
+    Lfm::routes();
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
@@ -37,19 +37,22 @@ Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 Route::get('/category/{slug}', [HomeController::class, 'ShowCategory'])->name('client.category');
 
-Route::get('/cart', [HomeController::class, 'ShowCart'])->name('client.cart');
 
 Route::get('/checkout', [HomeController::class, 'showCheckout'])->name('client.checkout');
 
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('client.detail');
 
-//login
-Route::get('client/login', [LoginController::class, 'login'])->name('client.login');
+//cart
+Route::post('/add-to-cart/{id}', [CartController::class, 'index'])->name('client.addToCart');
+Route::get('/cart', [CartController::class, 'show'])->name('client.cart');
+Route::post('/update-cart', [CartController::class, 'update'])->name('client.updateCart');
+Route::post('/delete-cart', [CartController::class, 'destroy'])->name('client.deleteCart');
+Route::post('/checkout-cart', [CartController::class, 'checkoutCart'])->name('client.checkoutCart');
 
-Route::post('client/login', [LoginController::class, 'authenticate']);
 
-Route::post('client/logout', [LoginController::class, 'logout']);
-
-//register
-Route::get('client/register', [LoginController::class, 'register'])->name('client.register');
-Route::post('client/register', [LoginController::class, 'store']);
+// Authentication Client
+Route::get('client/login', [LoginController::class, 'loginClient'])->name('client.login');
+Route::post('client/login', [LoginController::class, 'handleLoginClient'])->name('client.handleLogin');
+Route::post('client/logout', [LoginController::class, 'logoutClient'])->name('client.logout');
+Route::get('client/register', [LoginController::class, 'registerClient'])->name('client.register');
+Route::post('client/register', [LoginController::class, 'handleRegisterClient'])->name('client.handleRegister');
