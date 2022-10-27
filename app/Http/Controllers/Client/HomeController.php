@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,10 @@ class HomeController extends Controller
     }
 
     public function showCheckout(){
-        return view('client.checkout');
+        $carts = Session::get('carts');
+        return view('client.checkout',[
+            'carts'=>$carts
+        ]);
     }
 
     public function getProductDetail($id){
@@ -55,7 +59,7 @@ class HomeController extends Controller
     }
 
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -68,7 +72,7 @@ class HomeController extends Controller
         //
     }
 
-    
+
 
     /**
      * Display the specified resource.

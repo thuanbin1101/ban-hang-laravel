@@ -15,33 +15,25 @@
                             <div class="text-center mb-5">
                                 <h3 class="text-uppercase">Register to <strong>Colorlib</strong></h3>
                             </div>
+                            @include('alerts.alert')
 
-                            @if (count($errors) > 0)
-                                @foreach ($errors->all() as $message)
-                                    <div class="alert alert-danger display-hide">
-                                        <button class="close" data-close="alert"></button>
-                                        <span>{{ $message }}</span>
-                                    </div>
-                                @endforeach
-                            @endif
-
-
-                            <form action="{{ url('client/register') }}" method="post">
+                            <form action="{{route('client.handleRegister')}}" method="post">
                                 @csrf
                                 <div class="form-group first">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" placeholder="Your name"
-                                        name="name" id="name">
+                                           name="name" id="name">
                                 </div>
                                 <div class="form-group first">
                                     <label for="username">Email</label>
                                     <input type="text" class="form-control" placeholder="your-email@gmail.com"
-                                        name="email" id="email">
+                                           name="email" id="email">
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" placeholder="Your Password" name="password"
-                                        id="password">
+                                    <input type="password" class="form-control" placeholder="Your Password"
+                                           name="password"
+                                           id="password">
                                 </div>
 
                                 <input type="submit" value="Submit" class="btn btn-block py-2 btn-primary">

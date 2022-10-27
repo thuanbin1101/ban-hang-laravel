@@ -117,20 +117,29 @@ class CartService
     {
         try {
             DB::beginTransaction();
-            $customerCreate = Customer::query()->create([
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
-                'address' => $request->get('address'),
-                'phone' => $request->get('phone'),
-                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-                'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-            ]);
-            $carts = Session::get('carts');
-            $this->infoProductCart($carts, $customerCreate->id);
-            Session::forget('carts');
-            Session::flash('success', 'Đặt hàng thành công');
-            DB::commit();
-            return true;
+            $name = $request->get('name');
+            $email = $request->get('email');
+            $address = $request->get('address');
+            $phone = $request->get('phone');
+            if (!empty($name) && !empty($email) && !empty($address) && !empty($phone)) {
+                $customerCreate = Customer::query()->create([
+                    'name' => $name,
+                    'email' => $email,
+                    'address' => $address,
+                    'phone' => $phone,
+                    'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                    'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                ]);
+                $carts = Session::get('carts');
+                $this->infoProductCart($carts, $customerCreate->id);
+                Session::forget('carts');
+                Session::flash('success', 'Đặt hàng thành công');
+                DB::commit();
+                return true;
+            } else {
+                Session::flash('error', 'Bạn chưa điền đầy đủ thông tin');
+                return false;
+            }
 
         } catch (Exception $e) {
             DB::rollBack();
