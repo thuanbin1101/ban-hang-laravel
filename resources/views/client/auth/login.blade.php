@@ -16,27 +16,19 @@
                                 <h3 class="text-uppercase">Login to <strong>Colorlib</strong></h3>
                             </div>
 
-                            @if (count($errors) > 0)
-                                @foreach ($errors->all() as $message)
-                                    <div class="alert alert-danger display-hide">
-                                        <button class="close" data-close="alert"></button>
-                                        <span>{{ $message }}</span>
-                                    </div>
-                                @endforeach
-                            @endif
-
-
-                            <form action="{{ url('client/login') }}" method="post">
+                            @include('alerts.alert')
+                            <form action="{{route('client.handleLogin')}}" method="post">
                                 @csrf
                                 <div class="form-group first">
                                     <label for="username">Email</label>
                                     <input type="text" class="form-control" placeholder="your-email@gmail.com"
-                                        name="email" id="email">
+                                           name="email" id="email">
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" placeholder="Your Password" name="password"
-                                        id="password">
+                                    <input type="password" class="form-control" placeholder="Your Password"
+                                           name="password"
+                                           id="password">
                                 </div>
 
                                 <div class="d-sm-flex mb-5 align-items-center">
@@ -54,7 +46,8 @@
 
 
                                 <div class="">
-                                    <a href="{{ route('client.register') }}" class="btn btn-block py-2 text-white btn-primary">
+                                    <a href="{{ route('client.register') }}"
+                                       class="btn btn-block py-2 text-white btn-primary">
                                         Register
                                     </a>
                                     <a href="#" class="btn btn-block py-2 btn-facebook">

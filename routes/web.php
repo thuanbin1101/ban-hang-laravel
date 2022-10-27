@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Http\Controllers\Client\Auth\LoginController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Middleware\CheckLogin;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use UniSharp\LaravelFilemanager\Lfm;
+use App\Http\Controllers\Admin\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +22,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-     Lfm::routes();
+    Lfm::routes();
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
@@ -51,16 +50,9 @@ Route::post('/delete-cart', [CartController::class, 'destroy'])->name('client.de
 Route::post('/checkout-cart', [CartController::class, 'checkoutCart'])->name('client.checkoutCart');
 
 
-
-
-
-//login
-Route::get('client/login', [LoginController::class, 'login'])->name('client.login');
-
-Route::post('client/login', [LoginController::class, 'authenticate'])->name('client.doLogin');
-
-Route::post('client/logout', [LoginController::class, 'logout']);
-
-//register
-Route::get('client/register', [LoginController::class, 'register'])->name('client.register');
-Route::post('client/register', [LoginController::class, 'store']);
+// Authentication Client
+Route::get('client/login', [LoginController::class, 'loginClient'])->name('client.login');
+Route::post('client/login', [LoginController::class, 'handleLoginClient'])->name('client.handleLogin');
+Route::post('client/logout', [LoginController::class, 'logoutClient'])->name('client.logout');
+Route::get('client/register', [LoginController::class, 'registerClient'])->name('client.register');
+Route::post('client/register', [LoginController::class, 'handleRegisterClient'])->name('client.handleRegister');

@@ -51,7 +51,7 @@
                         <h4 class="font-weight-semi-bold m-0">Đơn hàng</h4>
                     </div>
                     <div class="card-body">
-                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        <h5 class="font-weight-medium mb-3">Sản phẩm</h5>
                         @php $total = 0;@endphp
                         @if(count($products) > 0 && isset($carts))
                             @foreach($products as $each)
@@ -73,9 +73,10 @@
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
-                        <button id="btnCheckoutCart" type="submit"
+                        {!! isset($carts) && !empty($carts) ? '<button id="btnCheckoutCart" type="submit"
                                 class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Đặt hàng
-                        </button>
+                        </button>' : '' !!}
+
                     </div>
                 </div>
             </div>

@@ -40,7 +40,7 @@
         <div class="col-lg-6 col-6 text-left">
             <form action="">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
+                    <input type="text" class="form-control" placeholder="Nhập sản phẩm cần tìm kiếm">
                     <div class="input-group-append">
                         <span class="input-group-text bg-transparent text-primary">
                             <i class="fa fa-search"></i>
@@ -81,7 +81,7 @@
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
                data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                <h6 class="m-0">Categories</h6>
+                <h6 class="m-0">Danh mục</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
             <nav
@@ -136,11 +136,11 @@
                         @auth
                             <form action="{{ url('client/logout') }}" method="post">
                                 {{ csrf_field() }}
-                                <button type="submit" class="nav-item btn btn-primary">Logout</button>
+                                <button type="submit" class="nav-item btn btn-primary">Đăng xuất</button>
                             </form>
                         @else
-                            <a href="{{ url('client/login') }}" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                            <a href="{{route('client.login') }}" class="nav-item nav-link">Đăng nhập</a>
+                            <a href="{{route('client.register')}}" class="nav-item nav-link">Đăng ký</a>
                         @endauth
                     </div>
                 </div>

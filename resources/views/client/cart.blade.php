@@ -23,11 +23,11 @@
                     <table class="table table-bordered text-center mb-0">
                         <thead class="bg-secondary text-dark">
                         <tr>
-                            <th>Products</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>số lượng</th>
+                            <th>Tổng</th>
+                            <th>Xoá</th>
                         </tr>
                         </thead>
                         <tbody class="align-middle contentCart" data-url="{{route('client.deleteCart')}}">
@@ -41,17 +41,17 @@
 
             </div>
             <div class="col-lg-4">
-                <form class="mb-5" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
-                        </div>
-                    </div>
-                </form>
+{{--                <form class="mb-5" action="">--}}
+{{--                    <div class="input-group">--}}
+{{--                        <input type="text" class="form-control p-4" placeholder="Coupon Code">--}}
+{{--                        <div class="input-group-append">--}}
+{{--                            <button class="btn btn-primary">Apply Coupon</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                        <h4 class="font-weight-semi-bold m-0">Giỏ hàng</h4>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
