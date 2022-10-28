@@ -6,9 +6,10 @@ return [
         'edit_user' => 'edit_user',
         'delete_user' => 'delete_user',
         'list_menu' => 'list_menu',
-        'edit_product'=>'edit_product'
+        'edit_product' => 'edit_product',
+        'list_role' => 'list_role'
     ],
-    'table_module'=>[
+    'table_module' => [
         'category',
         'slider',
         'menu',
@@ -17,7 +18,7 @@ return [
         'user',
         'role'
     ],
-    'module_children' =>[
+    'module_children' => [
         'list',
         'create',
         'edit',
