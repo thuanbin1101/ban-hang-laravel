@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 18, 2022 at 11:29 AM
+-- Generation Time: Oct 28, 2022 at 10:31 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.9
 
@@ -18,8 +18,46 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ban_hang`
+-- Database: `ban_hang1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `customer_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(1, 2, 22, 4, NULL, NULL),
+(2, 2, 24, 2, NULL, NULL),
+(3, 3, 21, 1, NULL, NULL),
+(4, 4, 24, 1, NULL, NULL),
+(5, 5, 22, 1, NULL, NULL),
+(6, 6, 22, 1, NULL, NULL),
+(7, 7, 22, 1, NULL, NULL),
+(8, 8, 26, 1, NULL, NULL),
+(9, 9, 26, 10, NULL, NULL),
+(10, 10, 23, 1, NULL, NULL),
+(11, 11, 22, 1, NULL, NULL),
+(12, 12, 24, 1, NULL, NULL),
+(13, 13, 26, 1, NULL, NULL),
+(14, 14, 25, 1, NULL, NULL),
+(15, 15, 25, 7, NULL, NULL),
+(16, 16, 22, 21, NULL, NULL),
+(17, 17, 21, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91,6 +129,45 @@ INSERT INTO `companies` (`id`, `name`, `description`, `created_at`, `updated_at`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 02:25:45', '2022-10-23 02:25:45'),
+(3, 'sdfa', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 02:28:40', '2022-10-23 02:28:40'),
+(4, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 02:30:08', '2022-10-23 02:30:08'),
+(5, 'asdf', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 02:31:18', '2022-10-23 02:31:18'),
+(6, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 02:32:12', '2022-10-23 02:32:12'),
+(7, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 02:33:11', '2022-10-23 02:33:11'),
+(8, 'fsd', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-23 22:19:42', '2022-10-23 22:19:42'),
+(9, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-25 06:25:15', '2022-10-25 06:25:15'),
+(10, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-25 15:16:30', '2022-10-25 08:16:30'),
+(11, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 2, '2022-10-25 15:26:40', '2022-10-25 15:26:40'),
+(12, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 1, '2022-10-25 15:29:52', '2022-10-25 15:29:52'),
+(13, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-26 03:35:27', '2022-10-26 03:35:27'),
+(14, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-26 03:51:33', '2022-10-26 03:51:33'),
+(15, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-26 03:59:26', '2022-10-26 03:59:26'),
+(16, 'thuan', 'thuan@gmail.com', '0865532467', 'ádasdasd', 0, '2022-10-26 05:38:49', '2022-10-26 05:38:49'),
+(17, 'fhgjfghj', 'tenten@gmail.com', '34t45', '3525', 0, '2022-10-27 15:48:21', '2022-10-27 15:48:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -124,11 +201,11 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `name`, `parent_id`, `slug`, `created_at`, `updated_at`) VALUES
-(7, 'Home', 0, 'home', '2022-10-08 01:40:03', '2022-10-08 01:40:03'),
-(8, 'Page', 0, 'page', '2022-10-08 01:40:19', '2022-10-08 01:40:19'),
-(9, 'Contract', 0, 'contract', '2022-10-08 01:40:24', '2022-10-08 01:40:24'),
-(10, 'Cart', 8, 'cart', '2022-10-08 01:40:31', '2022-10-08 01:40:31'),
-(11, 'Checkout', 8, 'checkout', '2022-10-08 01:40:36', '2022-10-08 01:40:36');
+(7, 'Trang Chủ', 0, '', '2022-10-08 01:40:03', '2022-10-08 01:40:03'),
+(8, 'Trang', 0, 'page', '2022-10-08 01:40:19', '2022-10-08 01:40:19'),
+(9, 'Liên hệ', 0, 'contract', '2022-10-08 01:40:24', '2022-10-08 01:40:24'),
+(10, 'Giỏ hàng', 8, 'cart', '2022-10-08 01:40:31', '2022-10-08 01:40:31'),
+(11, 'Thanh toán', 8, 'checkout', '2022-10-08 01:40:36', '2022-10-08 01:40:36');
 
 -- --------------------------------------------------------
 
@@ -171,7 +248,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (36, '2022_10_13_070850_create_table_user_role', 14),
 (37, '2022_10_13_070930_create_table_permission_role', 14),
 (39, '2022_10_15_081747_add_parent_id_column_to_permission_table', 15),
-(43, '2022_10_15_094831_add_keycode_column_to_permissions_table', 16);
+(43, '2022_10_15_094831_add_keycode_column_to_permissions_table', 16),
+(44, '2022_10_22_061457_alter_amount_column_to_products_table', 17),
+(47, '2022_10_22_071547_create_customers_table', 18),
+(50, '2022_10_22_072401_create_orders_table', 19),
+(51, '2022_10_22_102317_alter_price_column_to_products_table', 19),
+(52, '2022_10_22_103001_alter_price_column_to_products_table', 20),
+(53, '2022_10_23_092313_alter_status_column_to_carts_table', 21),
+(54, '2022_10_25_103934_delete_price_column_to_carts_table', 22),
+(55, '2022_10_25_155002_delete_status_column_to_carts_table', 23),
+(56, '2022_10_25_155030_add_status_column_to_customers_table', 23),
+(57, '2022_10_26_061724_add_level_column_to_users_table', 24),
+(60, '2022_10_27_132921_alter_level_column_to_users_table', 25);
 
 -- --------------------------------------------------------
 
@@ -240,7 +328,8 @@ INSERT INTO `permissions` (`id`, `name`, `display_name`, `key_code`, `parent_id`
 (52, 'list category', 'list category', 'list_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
 (53, 'create category', 'create category', 'create_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
 (54, 'edit category', 'edit category', 'edit_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
-(55, 'delete category', 'delete category', 'delete_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04');
+(55, 'delete category', 'delete category', 'delete_category', 51, '2022-10-16 00:21:04', '2022-10-16 00:21:04'),
+(56, 'cart', 'cart', NULL, 0, '2022-10-19 01:30:53', '2022-10-19 01:30:53');
 
 -- --------------------------------------------------------
 
@@ -345,7 +434,27 @@ INSERT INTO `permission_role` (`id`, `role_id`, `permission_id`, `created_at`, `
 (91, 14, 40, NULL, NULL),
 (92, 1, 16, NULL, NULL),
 (93, 1, 14, NULL, NULL),
-(94, 1, 17, NULL, NULL);
+(94, 1, 17, NULL, NULL),
+(95, 15, 27, NULL, NULL),
+(96, 15, 28, NULL, NULL),
+(97, 15, 29, NULL, NULL),
+(98, 15, 30, NULL, NULL),
+(99, 15, 32, NULL, NULL),
+(100, 15, 33, NULL, NULL),
+(101, 15, 34, NULL, NULL),
+(102, 15, 35, NULL, NULL),
+(103, 15, 37, NULL, NULL),
+(104, 15, 38, NULL, NULL),
+(105, 15, 39, NULL, NULL),
+(106, 15, 40, NULL, NULL),
+(107, 15, 42, NULL, NULL),
+(108, 15, 43, NULL, NULL),
+(109, 15, 44, NULL, NULL),
+(110, 15, 45, NULL, NULL),
+(111, 15, 52, NULL, NULL),
+(112, 15, 53, NULL, NULL),
+(113, 15, 54, NULL, NULL),
+(114, 15, 55, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -375,8 +484,8 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `amount` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
   `feature_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `feature_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -391,11 +500,13 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `amount`, `feature_image_path`, `feature_image_name`, `content`, `user_id`, `category_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(21, 'KT Tim Đá Rỗng', '150,000.00', NULL, '/storage/products/31/iaynMfFEdaW713ZwrZok.jpg', 'img_1940_thumb.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 19, '2022-10-08 02:12:09', '2022-10-08 03:31:05', NULL),
-(22, 'LT Daisy Tini', '310,000.00', NULL, '/storage/products/31/1qzpkNpyyjGl1pbeqQmw.jpg', 'LT616_1.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 20, '2022-10-08 02:13:44', '2022-10-08 03:27:24', NULL),
-(23, 'LC Thanh Ngang Đá Treo', '330,000.00', NULL, '/storage/products/31/FsrWMSdkAVwkkExvQ3FS.jpg', 'z2963496734813_b708b6d503ff42fb0377cab544a0ce1a.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 21, '2022-10-08 02:15:20', '2022-10-08 03:26:41', NULL),
-(24, 'DC Daisy Tini', '350,000.00', NULL, '/storage/products/31/YZlJkJKtXPEkjvfBHLCP.jpg', 'a491d21b68dc9282cbcd.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 17, '2022-10-08 02:17:18', '2022-10-08 03:26:01', NULL);
+INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `feature_image_path`, `feature_image_name`, `content`, `user_id`, `category_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(21, 'KT Tim Đá Rỗng', 800000, 29, '/storage/products/31/iaynMfFEdaW713ZwrZok.jpg', 'img_1940_thumb.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 19, '2022-10-08 02:12:09', '2022-10-27 08:31:14', NULL),
+(22, 'LT Daisy Tini', 200000, 31, '/storage/products/31/1qzpkNpyyjGl1pbeqQmw.jpg', 'LT616_1.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 20, '2022-10-08 02:13:44', '2022-10-25 22:37:46', NULL),
+(23, 'LC Thanh Ngang Đá Treo', 200000, 97, '/storage/products/31/FsrWMSdkAVwkkExvQ3FS.jpg', 'z2963496734813_b708b6d503ff42fb0377cab544a0ce1a.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 21, '2022-10-08 02:15:20', '2022-10-27 08:54:19', NULL),
+(24, 'DC Daisy Tini', 500000, 96, '/storage/products/31/YZlJkJKtXPEkjvfBHLCP.jpg', 'a491d21b68dc9282cbcd.jpg', '<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ: </span><span class=\"street\" title=\"STORE 47A Xuân Thuỷ\">STORE 47A Xuân Thuỷ</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2047A%20Xu%C3%A2n%20Thu%E1%BB%B7/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>\r\n<div class=\"stock-item\"><span class=\"dist\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn: </span><span class=\"street\" title=\"STORE 20 Tây Sơn\">STORE 20 Tây Sơn</span>\r\n<p class=\"link\"><a href=\"http://map.google.com/maps/place/STORE%2020%20T%C3%A2y%20S%C6%A1n/@,\" target=\"_blank\" rel=\"noopener\">(Xem bản đồ)</a> (Còn hàng)</p>\r\n</div>', 31, 17, '2022-10-08 02:17:18', '2022-10-25 08:29:00', NULL),
+(25, 'Giày adidas', 700000, NULL, '/storage/products/31/uH13gjCzRz84oTiEDdBT.png', '8609_01.png', '<p>sdfa</p>', 31, 18, '2022-10-22 03:34:31', '2022-10-25 21:04:35', NULL),
+(26, 'Vòng cổ đẹp', 200000, 30, '/storage/products/31/FNsqX9LBFNOGJIBid3Zo.jpg', 'AcA2LnWL_400x400.jpg', '<p>dfg</p>', 31, 18, '2022-10-23 02:17:53', '2022-10-25 20:39:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -421,9 +532,6 @@ INSERT INTO `product_images` (`id`, `image_path`, `image_name`, `product_id`, `c
 (27, '/storage/products/41/3kUnHlhsJzIi9HgPO310.jpg', 'LT610__1_.jpg', 19, '2022-10-08 02:08:12', '2022-10-08 02:08:12'),
 (28, '/storage/products/41/fJlPr5m8AW9EEjXVJHor.jpg', 'lc257.jpg', 20, '2022-10-08 02:09:17', '2022-10-08 02:09:17'),
 (29, '/storage/products/41/AHSBDP4Uqk9lb4VKHZZA.jpg', 'lc257_1.jpg', 20, '2022-10-08 02:09:17', '2022-10-08 02:09:17'),
-(30, '/storage/products/41/6XirdNG07MxbDUzbsEhA.jpg', 'dd8d506da2a144ff1db0.jpg', 21, '2022-10-08 02:12:09', '2022-10-08 02:12:09'),
-(31, '/storage/products/41/Yl8kucYKiSFYCzNeIMNa.jpg', 'img_1940.jpg', 21, '2022-10-08 02:12:09', '2022-10-08 02:12:09'),
-(32, '/storage/products/41/nbbwMSjg7UniKvG6Ypm1.jpg', 'img_1941.jpg', 21, '2022-10-08 02:12:09', '2022-10-08 02:12:09'),
 (33, '/storage/products/41/GpcLr8YKiLEyNopEdsp6.jpg', '22.jpg', 22, '2022-10-08 02:13:44', '2022-10-08 02:13:44'),
 (34, '/storage/products/41/tEp0eK1fpG3Jd6eaNNjt.jpg', '107044627_1224752287857170_326756194299242394_o.jpg', 22, '2022-10-08 02:13:44', '2022-10-08 02:13:44'),
 (35, '/storage/products/41/NvISLuJUWUW67DLEZw2A.jpg', 'a491d21b68dc9282cbcd.jpg', 22, '2022-10-08 02:13:44', '2022-10-08 02:13:44'),
@@ -432,7 +540,12 @@ INSERT INTO `product_images` (`id`, `image_path`, `image_name`, `product_id`, `c
 (38, '/storage/products/41/cWwmqbHFVLhlxUylVHza.jpg', '13_8_03.jpg', 24, '2022-10-08 02:17:18', '2022-10-08 02:17:18'),
 (39, '/storage/products/41/YNfRpCTQ3Op92bq063LP.jpg', '13_8_04.jpg', 24, '2022-10-08 02:17:18', '2022-10-08 02:17:18'),
 (40, '/storage/products/41/qejOBaeBbCfKE4uMXq2o.jpg', '27_5_daisy_tini_01.jpg', 24, '2022-10-08 02:17:18', '2022-10-08 02:17:18'),
-(41, '/storage/products/41/TMp0vTJ257W4dbMj3wof.jpg', 'img_7163_min.jpg', 24, '2022-10-08 02:17:18', '2022-10-08 02:17:18');
+(41, '/storage/products/41/TMp0vTJ257W4dbMj3wof.jpg', 'img_7163_min.jpg', 24, '2022-10-08 02:17:18', '2022-10-08 02:17:18'),
+(45, '/storage/products/31/BQZZEyZQg3WsFqQstVvJ.png', '8609_01.png', 21, '2022-10-21 23:10:34', '2022-10-21 23:10:34'),
+(46, '/storage/products/31/Fmal86IhEWfnfxSJfgPW.png', '719115_01.png', 21, '2022-10-21 23:10:34', '2022-10-21 23:10:34'),
+(47, '/storage/products/31/JkyuZHtAAkvzPbYG1JQe.png', 'giayjordan.png', 21, '2022-10-21 23:10:34', '2022-10-21 23:10:34'),
+(48, '/storage/products/31/BAlG1zaSXrDD9LdsRRBK.png', '719115_01.png', 25, '2022-10-22 03:34:31', '2022-10-22 03:34:31'),
+(49, '/storage/products/31/yOdIfHi4V9noF3vIYknv.jpg', 'AcA2LnWL_400x400.jpg', 26, '2022-10-23 02:17:53', '2022-10-23 02:17:53');
 
 -- --------------------------------------------------------
 
@@ -485,7 +598,10 @@ INSERT INTO `product_tags` (`id`, `product_id`, `tag_id`, `created_at`, `updated
 (36, 23, 10, '2022-10-08 02:15:20', '2022-10-08 02:15:20'),
 (37, 23, 11, '2022-10-08 02:15:20', '2022-10-08 02:15:20'),
 (38, 24, 10, '2022-10-08 02:17:18', '2022-10-08 02:17:18'),
-(39, 24, 11, '2022-10-08 02:17:18', '2022-10-08 02:17:18');
+(39, 24, 11, '2022-10-08 02:17:18', '2022-10-08 02:17:18'),
+(40, 25, 7, '2022-10-22 03:34:31', '2022-10-22 03:34:31'),
+(41, 26, 2, '2022-10-23 02:17:53', '2022-10-23 02:17:53'),
+(42, 26, 6, '2022-10-23 02:17:53', '2022-10-23 02:17:53');
 
 -- --------------------------------------------------------
 
@@ -510,7 +626,8 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) V
 (2, 'Content', 'Phát triển nội dung', NULL, '2022-10-16 00:23:38'),
 (3, 'Saler', 'Bán hàng', NULL, '2022-10-16 00:23:11'),
 (4, 'Developer', 'Phát triển hệ thống', NULL, '2022-10-16 00:24:16'),
-(14, 'Guest', 'Khách hàng', '2022-10-16 00:45:01', '2022-10-16 00:45:01');
+(14, 'Guest', 'Khách hàng', '2022-10-16 00:45:01', '2022-10-16 00:45:01'),
+(15, 'Staff', 'Nhân viên', '2022-10-28 02:52:07', '2022-10-28 02:52:07');
 
 -- --------------------------------------------------------
 
@@ -533,7 +650,9 @@ CREATE TABLE `role_user` (
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 47, NULL, NULL),
 (3, 2, 47, NULL, NULL),
-(4, 1, 31, NULL, NULL);
+(4, 1, 31, NULL, NULL),
+(6, 1, 50, NULL, NULL),
+(7, 15, 61, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -621,6 +740,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -629,49 +749,19 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ottilie McGlynn', 'tward@example.com', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'UQTMHhby5AoR9AbZspFMkt14fSpHSBnRiQHXqn4317f38NMGXUQNjmyaqx9F', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(2, 'Dr. Quinten Bosco PhD', 'wunsch.demond@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Z6pGT0kftO', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(3, 'Pierce Sauer', 'nicola.schultz@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '90LVQHGNwm', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(4, 'Helena Bauch', 'lora.morar@example.com', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xcQSVVz7hY', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(5, 'Makayla Buckridge', 'josiah.towne@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xlW2bKL2Ee', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(6, 'Mr. Gordon Green', 'justine81@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'YDzA0wTgrZ', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(7, 'Katlyn Heller', 'kertzmann.miguel@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'rwRB0PPs8J', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(8, 'Prof. Leonie Langosh PhD', 'quigley.adaline@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'OeSVMkM53p', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(9, 'Kraig Mayer', 'xkiehn@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'wenM2PBeDl', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(10, 'Art Schmidt', 'myrtice55@example.com', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6XbTPBxb8v', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(11, 'Judge Wisoky III', 'dixie.swaniawski@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'HfisDueYsV', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(12, 'Verda Ratke', 'maximillia.daniel@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'DmcNrHP54N', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(13, 'Manuela Fahey', 'reba80@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'hruxk8PlOg', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(14, 'Carol Rutherford V', 'oaufderhar@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RX19DNsD9Z', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(15, 'Leopold Stanton', 'corkery.malcolm@example.net', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'QyaiN4hhCV', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(16, 'Viola Block', 'kozey.may@example.com', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'sCILtiiMnw', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(17, 'Gabrielle Wolf III', 'cielo.stroman@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '00SbOQYyB8', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(18, 'Mauricio Lueilwitz', 'cmccullough@example.com', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '89nnNcyVh0', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(19, 'Ford O\'Reilly', 'daniel.sincere@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RRWUVyUFx2', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(20, 'Brian Stoltenberg', 'adrianna.torp@example.org', '2022-09-10 20:14:10', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5APu8l7OHn', '2022-09-10 20:14:10', '2022-09-10 20:14:10'),
-(21, 'Bridie Effertz', 'brady.weissnat@example.com', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'tCBDMbM2mj', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(22, 'June Cronin', 'ullrich.augusta@example.net', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'KtVVmx1Crr', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(23, 'Ms. Willie Stehr', 'jstamm@example.net', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'uFx3NkX1UZ', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(24, 'Adele Kuhic', 'teresa93@example.org', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RN1S7sYyVu', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(25, 'Mallory Murphy Sr.', 'jon09@example.com', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'fY6qv8IUI7', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(26, 'Prof. Shaylee Klein', 'raynor.mohammad@example.net', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'dCIrtC3uTK', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(27, 'Yvette Miller', 'colin.roob@example.org', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5fLp3zSK8f', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(28, 'Prof. Nadia Prohaska', 'leffler.glenda@example.com', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'diK7l1XkGt', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(29, 'Prof. Jovany Lang MD', 'chet80@example.net', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '75Z5Dpxtau', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(30, 'Kiera Wunsch', 'jgusikowski@example.org', '2022-09-10 20:15:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Vd9kCxXAQ7', '2022-09-10 20:15:54', '2022-09-10 20:15:54'),
-(31, 'thuan', 'thuan@gmail.com', NULL, '$2y$10$FWSjy84yYinNCsbvaZIl8eU7OrhDb4k8A2RhI59YeVKsvr8LpmjN2', '8nTWPUj4sVB9yO53Uag2Qv9ZcNO4rsJ8hwcIgrf7ROFp31EGxL6h5rH27vvN', '2022-09-10 21:20:12', '2022-09-10 21:20:12'),
-(32, 'ken', 'ken@gmail.com', NULL, '$2y$10$6.Q6iJUwzqCtYiaHZ81MwOsV4DKNCQJcoVGSN/.tNQ3mKM2Bg7JYK', NULL, '2022-09-20 21:01:28', '2022-09-20 21:01:28'),
-(33, 'ken', 'ken123@gmail.com', NULL, '$2y$10$2OoQo53WUGBKVjq9Jxa8uOAG7hX8snO/6T.DVhR8tkHDpMZdQFBPG', NULL, '2022-09-20 21:02:42', '2022-09-20 21:02:42'),
-(35, 'zczxc', '123@gmail.com', NULL, '$2y$10$vnnLjXhJ1KOiGVRg/DyIkuOsvac8wFjYyPInzocRoViIeAM51TuDm', NULL, '2022-09-21 07:26:20', '2022-09-21 07:26:20'),
-(36, 'zxc', '111@gmail.com', NULL, '$2y$10$Jc/55uTpkEDfm2uWpXiEuuh1ul7iAYg00ktsshuT791QMm/AkBfly', NULL, '2022-09-22 08:10:17', '2022-09-22 08:10:17'),
-(41, 'Tu Phan', 'clgtqwe1@gmail.com', NULL, '$2y$10$jKLqwj2vHJvVgzZLKERIruodZ3TGHQSELi8MlY9QWrTlbSN0aozcW', NULL, '2022-10-08 00:57:45', '2022-10-08 00:57:45'),
-(42, 'thuan123', 'thuan@gmaisdfal.com', NULL, '$2y$10$3phxJYUwFbjhwn9o3e5TcOKONn/6lgLR5eU62DjpG45LeAGLiPaw2', NULL, '2022-10-13 08:21:15', '2022-10-14 21:17:14'),
-(47, 'àgfsdgfdg12345', 'adsasdasd@gmail.com12345', NULL, '$2y$10$McF2OAfMcBY4PO/aB8bWxudGQQRbACwXloq8rWduO1RGRy25NSuaK', NULL, '2022-10-13 08:30:57', '2022-10-14 21:15:39');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `level`, `created_at`, `updated_at`) VALUES
+(50, 'ThaiAdmin', 'thai@gmail.com', NULL, '$2y$10$lsfMsWNxchcjgOtS68uwOeQMXQ2wrohZTv7mRPIUvvUwWiL5Gc.Wa', NULL, 'Admin', '2022-10-25 23:32:54', '2022-10-25 23:32:54'),
+(61, 'thuan', 'thuan@gmail.com', NULL, '$2y$10$ulhBC/xV0jivyt/CGRx87OhztRgaqisY0BPkYj9JQHlr3uV8tgUjm', NULL, 'Staff', '2022-10-28 02:49:45', '2022-10-28 02:49:45');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
@@ -683,6 +773,12 @@ ALTER TABLE `categories`
 -- Indexes for table `companies`
 --
 ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -790,6 +886,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -800,6 +902,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `companies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -817,19 +925,19 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `permission_role`
 --
 ALTER TABLE `permission_role`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -841,31 +949,31 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `product_tags`
 --
 ALTER TABLE `product_tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -889,7 +997,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

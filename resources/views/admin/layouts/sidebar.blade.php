@@ -32,22 +32,23 @@
                     <span> Dashboards </span>
                 </a>
             </li>
-            <li class="side-nav-item">
-                <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-users-alt"></i>
-                    <span> Users </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <ul class="side-nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="{{route('users.index')}}">List Users</a>
-                    </li>
-                    <li>
-                        <a href="{{route('users.create')}}">Create Users</a>
-                    </li>
-                </ul>
-            </li>
-
+            @can('list_user')
+                <li class="side-nav-item">
+                    <a href="javascript: void(0);" class="side-nav-link">
+                        <i class="uil-users-alt"></i>
+                        <span> Users </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="side-nav-second-level" aria-expanded="false">
+                        <li>
+                            <a href="{{route('users.index')}}">List Users</a>
+                        </li>
+                        <li>
+                            <a href="{{route('users.create')}}">Create Users</a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="uil-store"></i>
@@ -137,27 +138,29 @@
 
                 </ul>
             </li>
-            <li class="side-nav-item">
-                <a href="javascript: void(0);" class="side-nav-link">
-                    <i class="uil-shield"></i>
-                    <span> Roles Permissions </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <ul class="side-nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="{{route('roles.index')}}">List Roles</a>
-                    </li>
-                    <li>
-                        <a href="{{route('roles.create')}}">Create Role</a>
-                    </li>
-                    <li>
-                        <a href="{{route('permissions.index')}}">List Permissions</a>
-                    </li>
-                    <li>
-                        <a href="{{route('permissions.create')}}">Create Permission</a>
-                    </li>
-                </ul>
-            </li>
+            @can('list_role')
+                <li class="side-nav-item">
+                    <a href="javascript: void(0);" class="side-nav-link">
+                        <i class="uil-shield"></i>
+                        <span> Roles Permissions </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="side-nav-second-level" aria-expanded="false">
+                        <li>
+                            <a href="{{route('roles.index')}}">List Roles</a>
+                        </li>
+                        <li>
+                            <a href="{{route('roles.create')}}">Create Role</a>
+                        </li>
+                        <li>
+                            <a href="{{route('permissions.index')}}">List Permissions</a>
+                        </li>
+                        <li>
+                            <a href="{{route('permissions.create')}}">Create Permission</a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
         </ul>
         <!-- End Sidebar -->
 

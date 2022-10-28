@@ -31,6 +31,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('list_role'); // Gate
         $roles = $this->role::query()->paginate();
         return view('admin.roles.index', [
             'roles' => $roles

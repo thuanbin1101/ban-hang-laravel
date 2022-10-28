@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\UserController;
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'handleLogin'])->name('handleLogin');
+Route::get('register', [LoginController::class, 'register'])->name('register');
+Route::post('register', [LoginController::class, 'handleRegister'])->name('handleRegister');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
