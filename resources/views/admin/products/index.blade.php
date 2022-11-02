@@ -34,6 +34,7 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Category</th>
                 <th>Action</th>
             </tr>

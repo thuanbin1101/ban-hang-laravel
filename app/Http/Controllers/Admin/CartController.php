@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Services\CartService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -67,7 +68,18 @@ class CartController extends Controller
         ]);
     }
 
+    public function confirmOrder($id){
 
+        try {
+            $customer = Customer::query()->find($id);
+            $customer->status = 1;
+            $customer->save();
+            return response()->json(['code' => 200, 'message' => "Success"]);
+        } catch (\Exception $e) {
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *

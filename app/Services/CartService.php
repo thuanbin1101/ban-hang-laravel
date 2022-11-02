@@ -121,12 +121,14 @@ class CartService
             $email = $request->get('email');
             $address = $request->get('address');
             $phone = $request->get('phone');
-            if (!empty($name) && !empty($email) && !empty($address) && !empty($phone)) {
+            $payment_methods = $request->get('payment_methods');
+            if (!empty($name) && !empty($email) && !empty($address) && !empty($phone)  && !empty($payment_methods)) {
                 $customerCreate = Customer::query()->create([
                     'name' => $name,
                     'email' => $email,
                     'address' => $address,
                     'phone' => $phone,
+                    'payment_methods' => $payment_methods,
                     'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                     'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);

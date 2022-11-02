@@ -41,6 +41,14 @@
                                 <label>Địa chỉ</label>
                                 <input name="address" class="form-control" type="text" placeholder="123 Street">
                             </div>
+                            <div class="col-md-6 form-group">
+                                <label>Phương thức thanh toán</label>
+                                <select name="payment_methods" class="form-control">
+                                    <option value="Chuyển khoản">Chuyển Khoản</option>
+                                    <option value="Trực tiếp">Trực tiếp</option>
+                                </select>
+{{--                                <input name="payment_methods" class="form-control" type="text" placeholder="123 Street">--}}
+                            </div>
                         </div>
                     </form>
                 </div>

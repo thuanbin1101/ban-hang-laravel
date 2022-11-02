@@ -33,4 +33,5 @@ Route::middleware('auth')->group(function () {
     Route::get('search', [ProductController::class,'search'])->name('search.product');
     Route::get('customer', [CartController::class,'index'])->name('customer.list');
     Route::get('order-detail/{id}', [CartController::class,'show'])->name('orderDetail.list');
+    Route::get('confirmOrder/{id}', [CartController::class,'confirmOrder'])->name('order.confirmOrder');
 });
