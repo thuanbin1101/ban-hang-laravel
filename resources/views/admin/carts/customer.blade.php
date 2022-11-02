@@ -21,7 +21,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">List Menus</h4>
+                <h4 class="page-title">List Orders</h4>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
                     <td>{{$each->email}}</td>
                     <td>{{$each->phone}}</td>
                     <td>{{$each->address}}</td>
-                    <td>
+                    <td class="confirm-{{$each->id}}">
                         @if($each->status === 0)
                             <span class="badge badge-danger">Chưa xác nhận</span>
                         @elseif($each->status === 1)
@@ -64,16 +64,21 @@
                     </td>
                     <td>{{$each->created_at}}</td>
                     <td class="table-action">
-                        <a href="{{route('orderDetail.list',$each->id)}}" class="action-icon"> <i
-                                class="mdi mdi-pencil"></i></a>
-{{--                        <form style="display: inline" id="my_form" action="{{route('menus.destroy',$each->id)}}"--}}
-{{--                              method="POST">--}}
-{{--                            @method("DELETE")--}}
-{{--                            @csrf--}}
-{{--                            <a href="javascript:{}"--}}
-{{--                               data-url="{{route("menus.destroy",$each->id)}}"--}}
-{{--                               class="action-icon menu-delete"> <i class="mdi mdi-delete"></i></a>--}}
-{{--                        </form>--}}
+
+                        <a href="" class="action-confirm" data-url="{{route("order.confirmOrder",$each->id)}}">
+                            <i class="dripicons-checkmark" style="color: #42d29d!important"></i>
+                        </a>
+                        <a href="{{route('orderDetail.list',$each->id)}}" class="action-icon">
+                            <i class="mdi mdi-pencil"></i>
+                        </a>
+                        {{--                        <form style="display: inline" id="my_form" action="{{route('menus.destroy',$each->id)}}"--}}
+                        {{--                              method="POST">--}}
+                        {{--                            @method("DELETE")--}}
+                        {{--                            @csrf--}}
+                        {{--                            <a href="javascript:{}"--}}
+                        {{--                               data-url="{{route("menus.destroy",$each->id)}}"--}}
+                        {{--                               class="action-icon menu-delete"> <i class="mdi mdi-delete"></i></a>--}}
+                        {{--                        </form>--}}
                     </td>
                 </tr>
             @endforeach

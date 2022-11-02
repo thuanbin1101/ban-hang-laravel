@@ -123,8 +123,8 @@ class CategoryController extends Controller
             $this->category::query()->find($id)->delete();
             return response()->json(['code' => 200, 'message' => "Success"]);
         } catch (Exception $e) {
-            return response()->json(['code' => 500, 'message' => "Fail"], 500);
             Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
         }
     }
 }
