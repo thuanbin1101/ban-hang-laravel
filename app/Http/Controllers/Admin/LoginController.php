@@ -94,8 +94,8 @@ class LoginController extends Controller
             $dataAttemptClient = [
                 'email' => $data['email'],
                 'password' => $data['password'],
+                'level' => ['Customer', 'Admin', 'Staff'],
             ];
-//            dd($dataAttemptClient,Auth::attempt($dataAttemptClient));
             if (Auth::attempt($dataAttemptClient)) {
                 return redirect()->route('client.home');
             }

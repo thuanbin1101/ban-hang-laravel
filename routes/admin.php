@@ -20,8 +20,8 @@ Route::get('register', [LoginController::class, 'register'])->name('register');
 Route::post('register', [LoginController::class, 'handleRegister'])->name('handleRegister');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    Route::get('dashboard', [DashboardController::class,'index'])->name('home');
+Route::middleware(['check-admin-auth'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('home');
     Route::resource('categories', CategoryController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
@@ -30,8 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('settings', SettingController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
-    Route::get('search', [ProductController::class,'search'])->name('search.product');
-    Route::get('customer', [CartController::class,'index'])->name('customer.list');
-    Route::get('order-detail/{id}', [CartController::class,'show'])->name('orderDetail.list');
-    Route::get('confirmOrder/{id}', [CartController::class,'confirmOrder'])->name('order.confirmOrder');
+    Route::get('search', [ProductController::class, 'search'])->name('search.product');
+    Route::get('customer', [CartController::class, 'index'])->name('customer.list');
+    Route::get('order-detail/{id}', [CartController::class, 'show'])->name('orderDetail.list');
+    Route::get('confirmOrder/{id}', [CartController::class, 'confirmOrder'])->name('order.confirmOrder');
 });
