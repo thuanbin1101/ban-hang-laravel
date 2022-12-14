@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Services\CartService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -111,6 +112,12 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Customer::query()->find($id)->delete();
+            return response()->json(['code' => 200, 'message' => "Success"]);
+        } catch (Exception $e) {
+            Log::error("Message: {$e->getMessage()}. Line: {$e->getLine()}");
+            return response()->json(['code' => 500, 'message' => "Fail"], 500);
+        }
     }
 }

@@ -21,7 +21,7 @@ class CheckAdminAuth
         {
             return redirect()->route('login')->with(['error'=>'Vui lòng đăng nhập để tiếp tục']);
         }
-        if(Auth::user()['level'] != 'Admin')
+        if(Auth::user()['level'] === "Customer")
         {
             return redirect()->route('login')->with(['error'=>'Bạn không có quyền truy cập trang này']);
         }

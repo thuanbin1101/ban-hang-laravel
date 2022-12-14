@@ -32,6 +32,7 @@ Route::middleware(['check-admin-auth'])->group(function () {
     Route::resource('permissions', PermissionController::class);
     Route::get('search', [ProductController::class, 'search'])->name('search.product');
     Route::get('customer', [CartController::class, 'index'])->name('customer.list');
+    Route::delete('customer/delete/{id}', [CartController::class, 'destroy'])->name('customer.destroy');
     Route::get('order-detail/{id}', [CartController::class, 'show'])->name('orderDetail.list');
     Route::get('confirmOrder/{id}', [CartController::class, 'confirmOrder'])->name('order.confirmOrder');
 });

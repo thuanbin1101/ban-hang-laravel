@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     use StorageImageTrait;
-
+    
     private Product $product;
     private Category $category;
     private ProductImage $productImage;
